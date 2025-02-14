@@ -6,9 +6,9 @@ This project automates malicious prompt classification and synthetic prompt gene
 Extract keywords and phrases from policy documents.
 
 Methods
-- **TF-IDF + Regex** → Extracts compliance-related terms.
-- **spaCy NER** → Detects HR, Legal, and Ethics-related entities.
-- **Legal-BERT** → Assigns department labels and flagging status based on extracted words.
+- **Legal-BERT NER** → Extracts named entities such as HR, Legal, and Ethics-related terms.
+- **spaCy Dependency Parsing** → Identifies compliance-related clauses.
+- **SBERT Similarity Matching** → Assigns department labels to extracted terms.
 
 **Output:**
 - `data/outputs/word_label_bank.csv`
@@ -17,7 +17,7 @@ Methods
 ```markdown
 | Index | Department  | Word            | Phrase                                   | Flag (0/1) |
 |-------|-------------|-----------------|------------------------------------------|------------|
-| 1     | Legal       | insider trading | Illegal insider trading knowledge        | 1          |
+| 1     | Legal       | insider-trading | Illegal insider trading knowledge        | 1          |
 | 2     | HR          | harassment      | Unlawful workplace harassment report     | 1          |
 | 3     | Security    | phishing        | Email phishing attempt                   | 1          |
 ```
@@ -73,11 +73,11 @@ Generate both malicious and non-malicious prompts based on the extracted word-la
 
 ## Python Scripts in models/
 
-| Script                  | Purpose                                          |
-|-------------------------|--------------------------------------------------|
-| `bert_similarity.py`    | Computes Legal-BERT similarity between prompts. |
+| Script                  | Purpose                                         |
+|-------------------------|-------------------------------------------------|
+| `text_extraction.py`   | Extracts compliance terms using TF-IDF + Regex.  |
 | `flan_t5_prompt_gen.py` | Runs FLAN-T5 to generate synthetic prompts.     |
-| `tfidf_extraction.py`   | Extracts compliance terms using TF-IDF + Regex. |
+| `final_similarity_scoring.py`    | Computes Legal-BERT similarity between prompts. |
 
 ### Running Scripts
 Scripts can be executed in the background if needed:
@@ -96,20 +96,24 @@ python models/bert_similarity.py --input data/outputs/generated_prompts.csv
 conda env create -f environment.yml
 conda activate malicious_prompt_env
 ```
-
 ### Step 2: Generate the Word/Phrase-Label Bank
+```sh
+add files to policy documents folder
+```
+
+### Step 3: Generate the Word/Phrase-Label Bank
 ```sh
 python models/tfidf_extraction.py
 ```
 **Output:** `data/outputs/word_label_bank.csv`
 
-### Step 3: Generate Synthetic Prompts
+### Step 4: Generate Synthetic Prompts
 ```sh
 python models/flan_t5_prompt_gen.py --num_prompts 100 --label HR --malicious_ratio 0.5
 ```
 **Output:** `data/outputs/generated_prompts.csv`
 
-### Step 4: Validate Prompts with Legal-BERT
+### Step 5: Validate Prompts with Legal-BERT
 ```sh
 python models/bert_similarity.py --input data/outputs/generated_prompts.csv
 ```
