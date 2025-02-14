@@ -71,7 +71,7 @@ Generate both malicious and non-malicious prompts based on the extracted word-la
 
 ---
 
-## Python Scripts in `models/`
+## Python Scripts in models/
 
 | Script                  | Purpose                                          |
 |-------------------------|--------------------------------------------------|
