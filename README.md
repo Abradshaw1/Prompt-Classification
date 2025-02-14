@@ -2,8 +2,8 @@
 ## Overview
 This project automates malicious prompt classification and synthetic prompt generation for ParsonsGPT. The pipeline extracts compliance-related words and phrases from company policy documents, generates flagged and non-flagged prompts, and validates them using Legal-BERT against existing labeled prompts.
 
-### 1. Extracting Malicious Terms (`1_scrape_documents.ipynb`)
-**Goal:** Extract keywords and phrases from policy documents.
+### 1. Extracting Malicious Terms (1_scrape_documents.ipynb)
+Extract keywords and phrases from policy documents.
 
 Methods
 - **TF-IDF + Regex** → Extracts compliance-related terms.
@@ -12,11 +12,11 @@ Methods
 
 **Output:**
 - `data/outputs/word_label_bank.csv`
-- 
+
 **Structure of Word/Phrase Label Bank:**
 ```markdown
-| Index | Department    | Word            | Phrase                                    | Flag (0/1) |
-|-------|-------------|-----------------|-------------------------------------------|------------|
+| Index | Department  | Word            | Phrase                                   | Flag (0/1) |
+|-------|-------------|-----------------|------------------------------------------|------------|
 | 1     | Legal       | insider trading | Illegal insider trading knowledge        | 1          |
 | 2     | HR          | harassment      | Unlawful workplace harassment report     | 1          |
 | 3     | Security    | phishing        | Email phishing attempt                   | 1          |
@@ -24,8 +24,8 @@ Methods
 
 ---
 
-### 2. Generating Synthetic Prompts (`2_generate_prompts.ipynb`)
-**Goal:** Generate both malicious and non-malicious prompts based on the extracted word-label pairs.
+### 2. Generating Synthetic Prompts (2_generate_prompts.ipynb)
+Generate both malicious and non-malicious prompts based on the extracted word-label pairs.
 
 **Methods:**
 - **FLAN-T5** → Zero-shot & fine-tunable prompt generation.
@@ -39,11 +39,11 @@ Methods
 
 **Structure of dataset:**
 ```markdown
-| Prompt ID | Prompt                                      | Classification (0/1) | Department | Confidence Score | Source (Manual/Generated) |
-|-----------|--------------------------------------------|---------------------|------------|------------------|---------------------------|
-| 1         | Can I report a coworker for harassment?   | 1                   | HR         | 0.97             | Manual                    |
+| Prompt ID | Prompt                                       | Classification (0/1)| Department | Confidence Score | Source (Manual/Generated) |
+|-----------|----------------------------------------------|---------------------|------------|------------------|---------------------------|
+| 1         | Can I report a coworker for harassment?      | 1                   | HR         | 0.97             | Manual                    |
 | 2         | Can I file a fake complaint against my boss? | 1                   | HR         | 0.92             | Generated                 |
-| 3         | How do I optimize machine learning models? | 0                   | None       | 0.99             | Manual                    |
+| 3         | How do I optimize machine learning models?   | 0                   | None       | 0.99             | Manual                    |
 ```
 
 ---
@@ -61,11 +61,11 @@ Methods
 - `data/outputs/final_dataset.csv`
 **Structure of final/optional dataset:**
 ```markdown
-| Prompt ID | Prompt                                      | Classification (0/1) | Department | Confidence Score | Source (Manual/Generated) | Similarity Score |
-|-----------|--------------------------------------------|---------------------|------------|------------------|---------------------------|------------------|
-| 1         | Can I report a coworker for harassment?   | 1                   | HR         | 0.97             | Manual                    | 1.00             |
+| Prompt ID | Prompt                                       | Classification (0/1)| Department | Confidence Score | Source (Manual/Generated) | Similarity Score |
+|-----------|----------------------------------------------|---------------------|------------|------------------|---------------------------|------------------|
+| 1         | Can I report a coworker for harassment?      | 1                   | HR         | 0.97             | Manual                    | 1.00             |
 | 2         | Can I file a fake complaint against my boss? | 1                   | HR         | 0.92             | Generated                 | 0.85             |
-| 3         | How do I optimize machine learning models? | 0                   | None       | 0.99             | Manual                    | 1.00             |
+| 3         | How do I optimize machine learning models?   | 0                   | None       | 0.99             | Manual                    | 1.00             |
 ```
 
 
