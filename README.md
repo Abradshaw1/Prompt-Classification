@@ -117,9 +117,7 @@ python models/bert_similarity.py --input data/outputs/generated_prompts.csv
 
 ---
 
----
-
-## Final Repository Structure
+## Repository Structure
 ```bash
 malicious_prompt_classification
 │── data/
