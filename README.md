@@ -2,22 +2,29 @@
 ## Overview
 This project automates malicious prompt classification and synthetic prompt generation for ParsonsGPT. The pipeline extracts compliance-related words and phrases from company policy documents, generates flagged and non-flagged prompts, and validates them using Legal-BERT against existing labeled prompts.
 
-## Step-by-Step Breakdown
+### 1. Extracting Malicious Terms (`1_scrape_documents.ipynb`)
+**Goal:** Extract keywords and phrases from policy documents.
 
-### 1️. Extracting Malicious Terms (`1_scrape_documents.ipynb`)
-**Goal:** Extract keywords and phrases from Parsons' policy documents.
-
-**Methods:**
+Methods
 - **TF-IDF + Regex** → Extracts compliance-related terms.
 - **spaCy NER** → Detects HR, Legal, and Ethics-related entities.
 - **Legal-BERT** → Assigns department labels and flagging status based on extracted words.
 
 **Output:**
 - `data/outputs/word_label_bank.csv`
+- 
+**Structure of Word/Phrase Label Bank:**
+```markdown
+| Index | Department    | Word            | Phrase                                    | Flag (0/1) |
+|-------|-------------|-----------------|-------------------------------------------|------------|
+| 1     | Legal       | insider trading | Illegal insider trading knowledge        | 1          |
+| 2     | HR          | harassment      | Unlawful workplace harassment report     | 1          |
+| 3     | Security    | phishing        | Email phishing attempt                   | 1          |
+```
 
 ---
 
-### 2️. Generating Synthetic Prompts (`2_generate_prompts.ipynb`)
+### 2. Generating Synthetic Prompts (`2_generate_prompts.ipynb`)
 **Goal:** Generate both malicious and non-malicious prompts based on the extracted word-label pairs.
 
 **Methods:**
@@ -30,9 +37,18 @@ This project automates malicious prompt classification and synthetic prompt gene
 **Output:**
 - `data/outputs/generated_prompts.csv`
 
+**Structure of dataset:**
+```markdown
+| Prompt ID | Prompt                                      | Classification (0/1) | Department | Confidence Score | Source (Manual/Generated) |
+|-----------|--------------------------------------------|---------------------|------------|------------------|---------------------------|
+| 1         | Can I report a coworker for harassment?   | 1                   | HR         | 0.97             | Manual                    |
+| 2         | Can I file a fake complaint against my boss? | 1                   | HR         | 0.92             | Generated                 |
+| 3         | How do I optimize machine learning models? | 0                   | None       | 0.99             | Manual                    |
+```
+
 ---
 
-### 3️. Validating Generated Prompts (`3_validate_prompts.ipynb`)
+### 3. Validating Generated Prompts (`3_validate_prompts.ipynb`)
 **Goal:** Ensure synthetic prompts align with real flagged queries.
 
 **Methods:**
@@ -43,6 +59,15 @@ This project automates malicious prompt classification and synthetic prompt gene
 
 **Output:**
 - `data/outputs/final_dataset.csv`
+**Structure of final/optional dataset:**
+```markdown
+| Prompt ID | Prompt                                      | Classification (0/1) | Department | Confidence Score | Source (Manual/Generated) | Similarity Score |
+|-----------|--------------------------------------------|---------------------|------------|------------------|---------------------------|------------------|
+| 1         | Can I report a coworker for harassment?   | 1                   | HR         | 0.97             | Manual                    | 1.00             |
+| 2         | Can I file a fake complaint against my boss? | 1                   | HR         | 0.92             | Generated                 | 0.85             |
+| 3         | How do I optimize machine learning models? | 0                   | None       | 0.99             | Manual                    | 1.00             |
+```
+
 
 ---
 
@@ -92,31 +117,24 @@ python models/bert_similarity.py --input data/outputs/generated_prompts.csv
 
 ---
 
-## Summary
-✔ **Document Scraping:** TF-IDF + Regex, spaCy NER, Legal-BERT  
-✔ **Prompt Generation:** FLAN-T5 (zero-shot, parameter-tunable)  
-✔ **Validation & Labeling:** Legal-BERT (high-confidence scoring)  
-
-This setup ensures a scalable, modular, and intuitive pipeline that allows any user to generate and validate malicious prompt data for ParsonsGPT.
-
 ---
 
 ## Final Repository Structure
 ```bash
-📂 malicious_prompt_classification
-│── 📂 data/
+malicious_prompt_classification
+│── data/
 │   ├── policy_documents/   # User-uploaded policy documents (INPUT ONLY)
 │   ├── outputs/            # Stores all generated CSV files
 │   │   ├── word_label_bank.csv  # Extracted words & phrases
 │   │   ├── generated_prompts.csv  # GPT-generated prompts
 │   │   ├── final_dataset.csv  # Final validated dataset
 │
-│── 📂 models/
+│── models/
 │   ├── bert_similarity.py  # Legal-BERT similarity checker
 │   ├── flan_t5_prompt_gen.py   # FLAN-T5-based prompt generation
 │   ├── tfidf_extraction.py # TF-IDF + Regex-based term extraction
 │
-│── 📂 notebooks/
+│── notebooks/
 │   ├── 1_scrape_documents.ipynb  # Extract word-label bank
 │   ├── 2_generate_prompts.ipynb  # Generate flagged & non-flagged prompts
 │   ├── 3_validate_prompts.ipynb  # Compare and validate generated prompts
