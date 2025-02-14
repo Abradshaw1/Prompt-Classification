@@ -48,7 +48,7 @@ Generate both malicious and non-malicious prompts based on the extracted word-la
 
 ---
 
-### 3. Validating Generated Prompts (`3_validate_prompts.ipynb`)
+### 3. Validating Generated Prompts (3_validate_prompts.ipynb)
 **Goal:** Ensure synthetic prompts align with real flagged queries.
 
 **Methods:**
