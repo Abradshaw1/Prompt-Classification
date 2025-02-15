@@ -1,14 +1,30 @@
 # Malicious Prompt-Classification
 ## Overview
-This project automates malicious prompt classification and synthetic prompt generation for ParsonsGPT. The pipeline extracts compliance-related words and phrases from company policy documents, generates flagged and non-flagged prompts, and validates them using Legal-BERT against existing labeled prompts.
+This project aims to build a synthetic dataset using policy documents in order to finetune and create a malicious prompt for few-shot prompt classificaiton. The pipeline follows the structure:
+1. Extracts compliance-related words and phrases from **company policy documents**.
+2. Assigns **department labels** to extracted terms using **Legal-BERT**, **TF-IDF + spaCy**, and **SBERT**.
+3. Generates synthetic **malicious and non-malicious prompts** based on extracted phrases.
+4. Validates the generated prompts using **Legal-BERT** similarity scoring
 
-### 1. Extracting Malicious Terms (1_scrape_documents.ipynb)
+## Pipeline
+
+### 1. Preprocessing Policy Documents (`preprocess_policy_docs.py`)
+**Goal:** Extract clean text from policy documents by removing metadata, disclaimers, and irrelevant content.
+
+#### **Methods:**
+- **PyMuPDF (`fitz`)**: Extracts text from PDFs.
+- **Regular expressions (`re`)**: Removes metadata like "Page X of Y," effective dates, classification labels, and other non-relevant sections.
+
+#### **Output:**
+- Cleaned text files stored in `data/cleaned_policy_documents/`.
+
+### 2. Extracting Malicious Terms
 Extract keywords and phrases from policy documents.
 
 Methods
-- **Legal-BERT NER** → Extracts named entities such as HR, Legal, and Ethics-related terms.
-- **spaCy Dependency Parsing** → Identifies compliance-related clauses.
-- **SBERT Similarity Matching** → Assigns department labels to extracted terms.
+- **Named Entity Recognition (NER) with Legal-BERT**: Extracts named entities related to HR, Legal, Ethics, and Compliance.
+- **TF-IDF & spaCy Dependency Parsing**: Selects the most informative words from extracted phrases.
+- **SBERT Similarity Matching**: Assigns department labels to extracted words based on similarity.
 
 **Output:**
 - `data/outputs/word_label_bank.csv`
@@ -24,11 +40,11 @@ Methods
 
 ---
 
-### 2. Generating Synthetic Prompts (2_generate_prompts.ipynb)
+### 2. Generating Synthetic Prompts
 Generate both malicious and non-malicious prompts based on the extracted word-label pairs.
 
-**Methods:**
-- **FLAN-T5** → Zero-shot & fine-tunable prompt generation.
+Methods:
+- **FLAN-T5**: Zero-shot & fine-tunable prompt generation.
 - **User-defined parameters:**
   - Department: (HR, Legal, Security, etc.)
   - Number of prompts to generate
@@ -48,7 +64,7 @@ Generate both malicious and non-malicious prompts based on the extracted word-la
 
 ---
 
-### 3. Validating Generated Prompts (3_validate_prompts.ipynb)
+### 3. Validating Generated Prompts
 **Goal:** Ensure synthetic prompts align with real flagged queries.
 
 **Methods:**
@@ -75,7 +91,8 @@ Generate both malicious and non-malicious prompts based on the extracted word-la
 
 | Script                  | Purpose                                         |
 |-------------------------|-------------------------------------------------|
-| `text_extraction.py`   | Extracts compliance terms using TF-IDF + Regex.  |
+| `preprocess_policy_documents.py`|Strip headings, alphanumeric chars and clean |
+| `build_word_bank.py`   | Extracts compliance terms using TF-IDF + Regex.  |
 | `flan_t5_prompt_gen.py` | Runs FLAN-T5 to generate synthetic prompts.     |
 | `final_similarity_scoring.py`    | Computes Legal-BERT similarity between prompts. |
 
@@ -96,26 +113,29 @@ python models/bert_similarity.py --input data/outputs/generated_prompts.csv
 conda env create -f environment.yml
 conda activate malicious_prompt_env
 ```
-### Step 2: Generate the Word/Phrase-Label Bank
+### Step 2: Add Policy Documents
 ```sh
 add files to policy documents folder
 ```
-
+### Step 3: Clean Policy Documents
+```sh
+python preprocess_policy_documents.py
+```
 ### Step 3: Generate the Word/Phrase-Label Bank
 ```sh
-python models/tfidf_extraction.py
+python build_word_bank.py
 ```
 **Output:** `data/outputs/word_label_bank.csv`
 
 ### Step 4: Generate Synthetic Prompts
 ```sh
-python models/flan_t5_prompt_gen.py --num_prompts 100 --label HR --malicious_ratio 0.5
+python models/flan_t5_prompt_gen.py
 ```
 **Output:** `data/outputs/generated_prompts.csv`
 
 ### Step 5: Validate Prompts with Legal-BERT
 ```sh
-python models/bert_similarity.py --input data/outputs/generated_prompts.csv
+python build_final_ds.py --input data/outputs/generated_prompts.csv
 ```
 **Output:** `data/outputs/final_dataset.csv`
 
@@ -125,22 +145,22 @@ python models/bert_similarity.py --input data/outputs/generated_prompts.csv
 ```bash
 malicious_prompt_classification
 │── data/
-│   ├── policy_documents/   # User-uploaded policy documents (INPUT ONLY)
-│   ├── outputs/            # Stores all generated CSV files
-│   │   ├── word_label_bank.csv  # Extracted words & phrases
-│   │   ├── generated_prompts.csv  # GPT-generated prompts
-│   │   ├── final_dataset.csv  # Final validated dataset
+│   ├── policy_documents/            # Raw policy documents (INPUT)
+│   ├── cleaned_policy_documents/    # Processed text (OUTPUT)
+│   ├── outputs/                     # Stores generated CSV files
+│   │   ├── word_label_bank.csv      # Extracted words & phrases
+│   │   ├── generated_prompts.csv    # Generated prompts
+│   │   ├── final_dataset.csv         # Final validated dataset
 │
-│── models/
-│   ├── bert_similarity.py  # Legal-BERT similarity checker
-│   ├── flan_t5_prompt_gen.py   # FLAN-T5-based prompt generation
-│   ├── tfidf_extraction.py # TF-IDF + Regex-based term extraction
+│── run/
+│   ├── preprocess_policy_docs.py    # Cleans and extracts text from PDFs
+│   ├── build_word_bank.py           # Identifies key phrases & assigns labels
+│   ├── flan_t5_prompt_gen.py       # Generates synthetic prompts
+│   ├── build_final_ds.py           # Legal-BERT similarity checker for final data set
 │
 │── notebooks/
-│   ├── 1_scrape_documents.ipynb  # Extract word-label bank
-│   ├── 2_generate_prompts.ipynb  # Generate flagged & non-flagged prompts
-│   ├── 3_validate_prompts.ipynb  # Compare and validate generated prompts
+│   ├── 1_scrape_documents.ipynb     # Interactive notebook for document processing
 │
-│── environment.yml   # Conda environment file
-│── README.md
+│── environment.yml                  # Conda environment setup
+│── README.md                        # Project documentation
 
