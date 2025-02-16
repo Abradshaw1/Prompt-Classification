@@ -8,7 +8,7 @@ This project aims to build a synthetic dataset using policy documents in order t
 
 ## Pipeline
 
-### 1. Preprocessing Policy Documents (`preprocess_policy_docs.py`)
+### 1. Preprocessing Policy Documents (preprocess_policy_docs.py)
 **Goal:** Extract clean text from policy documents by removing metadata, disclaimers, and irrelevant content.
 
 #### **Methods:**
@@ -40,7 +40,7 @@ Methods
 
 ---
 
-### 2. Generating Synthetic Prompts
+### 2. Generating Synthetic Prompts (flan_t5_prompt_gen.py)
 Generate both malicious and non-malicious prompts based on the extracted word-label pairs.
 
 Methods:
@@ -94,15 +94,8 @@ Methods:
 | `preprocess_policy_documents.py`|Strip headings, alphanumeric chars and clean |
 | `build_word_bank.py`   | Extracts compliance terms using TF-IDF + Regex.  |
 | `flan_t5_prompt_gen.py` | Runs FLAN-T5 to generate synthetic prompts.     |
-| `final_similarity_scoring.py`    | Computes Legal-BERT similarity between prompts. |
+| `final_similarity_scoring.py` | Computes Legal-BERT similarity between prompts and finalized dataset. |
 
-### Running Scripts
-Scripts can be executed in the background if needed:
-```sh
-python models/tfidf_extraction.py
-python models/flan_t5_prompt_gen.py --num_prompts 100 --label HR --malicious_ratio 0.5
-python models/bert_similarity.py --input data/outputs/generated_prompts.csv
-```
 
 ---
 
@@ -121,19 +114,19 @@ add files to policy documents folder
 ```sh
 python preprocess_policy_documents.py
 ```
-### Step 3: Generate the Word/Phrase-Label Bank
+### Step 4: Generate the Word/Phrase-Label Bank
 ```sh
 python build_word_bank.py
 ```
 **Output:** `data/outputs/word_label_bank.csv`
 
-### Step 4: Generate Synthetic Prompts
+### Step 5: Generate Synthetic Prompts
 ```sh
 python models/flan_t5_prompt_gen.py
 ```
 **Output:** `data/outputs/generated_prompts.csv`
 
-### Step 5: Validate Prompts with Legal-BERT
+### Step 6: Validate Prompts with Legal-BERT
 ```sh
 python build_final_ds.py --input data/outputs/generated_prompts.csv
 ```
