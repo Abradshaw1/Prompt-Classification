@@ -33,6 +33,16 @@ prompt_id = 1
 # Setup Logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
+
+def compute_probability_confidence(log_probs):
+    """Compute an averaged probability-based confidence score in the range [0,1]."""
+    if log_probs and isinstance(log_probs, tuple):
+        token_probs = [F.softmax(score, dim=-1) for score in log_probs]  # Softmax to get probabilities
+        top_token_probs = [prob.max().item() for prob in token_probs]  # Extract max token probability per step
+        confidence_score = sum(top_token_probs) / len(top_token_probs)  # Average probability
+        return round(confidence_score, 4)  # Normalize to 4 decimal places
+    return 0.5 
+
 def generate_prompt_variations(department, word, phrase, department_words, malicious=True):
 
     # Strictly mix words **only within the same department**
@@ -90,18 +100,25 @@ def generate_prompt_variations(department, word, phrase, department_words, malic
         output_scores=True  # Return confidence scores
     )
 
+    generated_texts = [tokenizer.decode(output, skip_special_tokens=True) for output in outputs.sequences]
+
+    # Compute confidence score using probabilities
+    confidence_score = compute_probability_confidence(outputs.scores)
+
+    return [(text, confidence_score) for text in generated_texts]
+
     # Extract generated text
     #prompts = [tokenizer.decode(output, skip_special_tokens=True) for output in outputs.sequences]
 
     # Compute confidence scores (if available)
-    log_probs = outputs.scores  # Tuple of tensors
+    # log_probs = outputs.scores  # Tuple of tensors
 
-    if log_probs and isinstance(log_probs, tuple):
-        token_probs = [F.softmax(score, dim=-1) for score in log_probs]
-        top_token_probs = [prob.max().item() for prob in token_probs]
-        confidence_score = round(sum(top_token_probs) / len(top_token_probs), 2)
+    # if log_probs and isinstance(log_probs, tuple):
+    #     token_probs = [F.softmax(score, dim=-1) for score in log_probs]
+    #     top_token_probs = [prob.max().item() for prob in token_probs]
+    #     confidence_score = round(sum(top_token_probs) / len(top_token_probs), 2)
 
-    return [(tokenizer.decode(output, skip_special_tokens=True), confidence_score) for output in outputs.sequences]
+    # return [(tokenizer.decode(output, skip_special_tokens=True), confidence_score) for output in outputs.sequences]
 
 # **Ensure strict department separation**
 department_groups = df.groupby("Department")["Phrase"].apply(lambda x: " ".join(x).split()).to_dict()
