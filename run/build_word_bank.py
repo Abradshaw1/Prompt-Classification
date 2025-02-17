@@ -27,7 +27,6 @@ logger.info("Models loaded successfully.")
 
 
 def read_cleaned_text_files():
-    """Reads all cleaned text documents from the folder."""
     logger.info("Reading cleaned text files...")
     documents = {}
     files = [f for f in os.listdir(DOC_FOLDER) if f.endswith(".txt")]

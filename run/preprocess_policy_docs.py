@@ -3,14 +3,6 @@ import fitz  # PyMuPDF for extracting text from PDFs
 import re
 
 def process_and_clean_pdfs(input_folder, output_folder):
-    """
-    Recursively processes all PDFs in the input folder, extracts text, applies preprocessing,
-    and saves cleaned text files in the output folder while printing previews.
-
-    Args:
-        input_folder (str): Folder containing PDF files.
-        output_folder (str): Folder where cleaned text files will be saved.
-    """
     os.makedirs(output_folder, exist_ok=True) 
 
     for root, _, files in os.walk(input_folder): 
