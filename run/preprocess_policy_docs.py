@@ -14,7 +14,7 @@ def process_and_clean_pdfs(input_folder, output_folder):
                     raw_text = " ".join([page.get_text("text") for page in doc])
                 initial_word_count = len(raw_text.split())
                 patterns_to_remove = [
-                    r'Page\s+\d+\s+of\s+\d+',  # Page numbers
+                    r'Page\s+\d+\s+of\s+\d+',  # Page numberss
                     r'Rev\.\s*\d+',  # Revision labels
                     r'Effective Date:.*',  # Effective Date metadata
                     r'Info Classification:.*',  # Info Classification metadata
