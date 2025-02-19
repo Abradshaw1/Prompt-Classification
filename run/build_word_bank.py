@@ -12,6 +12,20 @@ from tabulate import tabulate
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
+logger.info("Checking system hardware...")
+gpu_available = torch.cuda.is_available()
+num_gpus = torch.cuda.device_count()
+gpu_name = torch.cuda.get_device_name(0) if gpu_available else "None"
+
+logger.info(f"GPU Available: {gpu_available}")
+logger.info(f"Number of GPUs: {num_gpus}")
+logger.info(f"Using GPU: {gpu_name}")
+
+# Set device
+device = "cuda" if gpu_available else "cpu"
+
+
+
 DOC_FOLDER = "/home/abradsha/Prompt-Classification/data/cleaned_policy_documents/"
 OUTPUT_FILE = "/home/abradsha/Prompt-Classification/data/outputs/word_label_bank.csv"
 DEPARTMENT_LABELS = ["HR", "Legal", "Security", "Ethics and Compliance", "Government Relations"]
@@ -19,9 +33,9 @@ logger.info("Loading models...")
 LEGAL_BERT_MODEL = "nlpaueb/legal-bert-base-uncased"
 SENTENCE_BERT_MODEL = "all-MiniLM-L6-v2"
 tokenizer = AutoTokenizer.from_pretrained(LEGAL_BERT_MODEL)
-ner_model = AutoModelForTokenClassification.from_pretrained(LEGAL_BERT_MODEL)
-ner_pipeline = pipeline("ner", model=ner_model, tokenizer=tokenizer, aggregation_strategy="simple")
-sbert_model = SentenceTransformer(SENTENCE_BERT_MODEL)
+ner_model = AutoModelForTokenClassification.from_pretrained(LEGAL_BERT_MODEL).to(device)
+ner_pipeline = pipeline("ner", model=ner_model, tokenizer=tokenizer, aggregation_strategy="simple", device=0 if gpu_available else -1)
+sbert_model = SentenceTransformer(SENTENCE_BERT_MODEL, device=device)
 nlp = spacy.load("en_core_web_trf")
 logger.info("Models loaded successfully.")
 
@@ -64,10 +78,6 @@ def extract_named_entities(text):
 
     if current_phrase:
         full_entities.append(" ".join(current_phrase))
-
-    # logger.info("\n=== Legal-BERT Extracted Entities ===")
-    # for phrase in full_entities:
-    #     logger.info(f"- {phrase}")
 
     return list(set(full_entities))
 
@@ -129,21 +139,38 @@ def main():
             if key_word:
                 phrase_dict[key_word] = phrase  # Store in dictionary
 
-        
-        logger.info("\n=== TF-IDF Extracted Key-Value Pairs ===")
-        table = [[key, phrase_dict[key]] for key in phrase_dict]
-        #logger.info("\n" + tabulate(table, headers=["Malicious Word", "Full Phrase"], tablefmt="grid"))
+        logger.info("\n=== Sample of TF-IDF Extracted Key-Value Pairs ===")
+        sample_pairs = list(phrase_dict.items())[:10]  # Show the first 10 items
+        sample_table = [[key, sample_pairs[key]] for key in range(min(10, len(sample_pairs)))]
+        logger.info("\n" + tabulate(sample_table, headers=["Malicious Word", "Full Phrase"], tablefmt="grid"))
+
+
+        # logger.info("\n=== TF-IDF Extracted Key-Value Pairs ===")
+        # table = [[key, phrase_dict[key]] for key in phrase_dict]
+        # #logger.info("\n" + tabulate(table, headers=["Malicious Word", "Full Phrase"], tablefmt="grid"))
 
         word_labels = assign_labels(phrase_dict.keys())
 
         logger.info("\n=== SBERT Assigned Labels ===")
         labeled_table = [[word_labels[key], key, phrase_dict[key]] for key in phrase_dict]
+        # Log label assignments, summarizing counts instead of showing every pair
+        label_counts = pd.Series([word_labels[key] for key in phrase_dict]).value_counts()
+        logger.info("\n" + tabulate(label_counts.reset_index(), headers=["Department", "Count"], tablefmt="grid"))
+
+
+        # logger.info("\n=== SBERT Assigned Labels ===")
+        # labeled_table = [[word_labels[key], key, phrase_dict[key]] for key in phrase_dict]
         #logger.info("\n" + tabulate(labeled_table, headers=["Department", "Malicious Word", "Phrase"], tablefmt="grid"))
 
         for key_word, phrase in phrase_dict.items():
             extracted_data.append([word_labels[key_word], key_word, phrase, 1])
             
     df = pd.DataFrame(extracted_data, columns=["Department", "Malicious Word", "Phrase", "Flag"])
+    label_counts = df["Department"].value_counts()
+    label_summary = tabulate(label_counts.reset_index(), headers=["Department", "Count"], tablefmt="grid")
+    
+    logger.info("\n=== Final Label Counts Before Saving ===")
+    logger.info("\n" + label_summary)
     df.to_csv(OUTPUT_FILE, index=False)
     logger.info(f"Final extracted data saved to {OUTPUT_FILE}")
 

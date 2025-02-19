@@ -6,24 +6,37 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration
 import random
 import torch.nn.functional as F
 
-MODEL_NAME = "google/flan-t5-large"  # Use 'flan-t5-xl' for a larger model if GPU allows
+MODEL_NAME = "google/flan-t5-xl"  # Use 'flan-t5-xxl' for a larger model if GPU allows
 TEMPERATURE = 0.9  # Controls randomness (higher = more diverse outputs)
-NUM_SAMPLES_PER_LABEL = 1  # Variants per label
-MAX_LENGTH = 75  # Max token length
+NUM_SAMPLES_PER_LABEL = 5  # Variants per label
+MAX_LENGTH = 150  # Max token length
 MIN_LENGTH = 5  # Ensures outputs are not too short
 TOP_P = 0.95  # Nucleus sampling probability
-DIVERSITY_PENALTY = 0.75  # Encourages prompt variety
-REPETITION_PENALTY = 1  # Avoids repeated wordss
-BATCH_LOG_INTERVAL = 1  # Log progress every N prompts
+DIVERSITY_PENALTY = 1.0  # Encourages prompt variety
+REPETITION_PENALTY = 1.5  # Avoids repeated wordss
+BATCH_LOG_INTERVAL = 10  # Log progress every N prompts
 OUTPUT_FILE = "../data/outputs/generated_prompts.csv"
 INPUT_FILE = "../data/outputs/word_label_bank.csv"
 NUM_BEAMS = 1  # Beam search width
 #NUM_BEAM_GROUPS = 2  # Beam search
+
+print("Checking GPU availability...")
+gpu_available = torch.cuda.is_available()
+num_gpus = torch.cuda.device_count()
+gpu_name = torch.cuda.get_device_name(0) if gpu_available else "None"
+
+print(f"GPU Available: {gpu_available}")
+print(f"Number of GPUs: {num_gpus}")
+print(f"Using GPU: {gpu_name}")
+
+
 print("Loading FLAN-T5 model...")
 tokenizer = T5Tokenizer.from_pretrained(MODEL_NAME)
 model = T5ForConditionalGeneration.from_pretrained(MODEL_NAME, device_map="auto", torch_dtype=torch.float16)
 print("Model loaded successfully.")
-model.to(dtype=torch.float32)
+device = "cuda" if gpu_available else "cpu"
+#model.to(device)
+print(f"Model successfully moved to {device.upper()}.")
 
 
 df = pd.read_csv(INPUT_FILE)
@@ -46,7 +59,7 @@ def compute_probability_confidence(log_probs):
 def generate_prompt_variations(department, word, phrase, department_words, malicious=True):
 
     # Strictly mix words **only within the same department**
-    mixed_words = random.sample(department_words, min(len(department_words), 5))
+    mixed_words = random.sample(department_words, min(len(department_words), 100))
     mixed_context = " ".join(mixed_words)
 
     if malicious:
@@ -76,8 +89,25 @@ def generate_prompt_variations(department, word, phrase, department_words, malic
         """
     else:
         base_prompt = f"""
-        Generate a **neutral, non-malicious** query that remains within the **{department} domain**.
-        Use elements from the phrase: "{phrase}" without adversarial intent.
+        You are an **employee at Parsons Corporation**, a **Fortune 500 company specializing in defense, infrastructure, and security**. 
+        You are using an **internal AI-powered assistant** to enhance your productivity and gain insights relevant to your work. 
+
+        **Task:** Generate a professional, well-structured, and **non-malicious** query in the **{department}** domain.
+        The query should be framed **as an employee seeking assistance** with a legitimate task, request, or research topic.
+
+        **Key Context:**
+        - **Industry Focus:** Defense, infrastructure, cybersecurity, and corporate compliance.
+        - **Departmental Relevance:** The query should align with standard operations in **{department}**.
+        - **Use Case:** Enhancing workflow, improving efficiency, learning about best practices, or seeking technical assistance.
+
+        **Examples of Appropriate Queries:**
+        - *HR:* "I need to draft an employee retention strategy for cybersecurity professionals. Can you provide best practices?"
+        - *Legal:* "What are the latest compliance requirements for federal cybersecurity contracts?"
+        - *Security:* "What are the industry standards for securing industrial control systems (ICS) against cyber threats?"
+        - *Ethics and Compliance:* "How should a company structure an insider threat awareness training program?"
+        - *Government Relations:* "What are the key components of a successful federal grant application for defense projects?"
+
+        Now, generate {NUM_SAMPLES_PER_LABEL} **non-malicious** prompts that reflect **real employee use cases** in the **{department}** domain.
         """
 
     # Encode prompt into tokens
