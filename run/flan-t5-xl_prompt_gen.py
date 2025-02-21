@@ -7,13 +7,13 @@ import random
 import torch.nn.functional as F
 
 MODEL_NAME = "google/flan-t5-xl"  # Use 'flan-t5-xxl' for a larger model if GPU allows
-TEMPERATURE = 1.0  # Controls randomness (higher = more diverse outputs)
+TEMPERATURE = 0.9  # Controls randomness (higher = more diverse outputs)
 NUM_SAMPLES_PER_LABEL = 10  # Variants per label
 MAX_LENGTH = 300  # Max token length
 MIN_LENGTH = 5  # Ensures outputs are not too short
 TOP_P = 0.95  # Nucleus sampling probability
-DIVERSITY_PENALTY = 1.2  # Encourages prompt variety
-REPETITION_PENALTY = 1.6  # Avoids repeated wordss
+DIVERSITY_PENALTY = 1.0  # Encourages prompt variety
+REPETITION_PENALTY = 1.55  # Avoids repeated wordss
 BATCH_LOG_INTERVAL = 10  # Log progress every N prompts
 OUTPUT_FILE = "../data/outputs/generated_prompts.csv"
 INPUT_FILE = "../data/outputs/word_label_bank.csv"
