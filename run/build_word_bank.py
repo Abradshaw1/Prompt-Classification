@@ -21,10 +21,7 @@ logger.info(f"GPU Available: {gpu_available}")
 logger.info(f"Number of GPUs: {num_gpus}")
 logger.info(f"Using GPU: {gpu_name}")
 
-# Set device
 device = "cuda" if gpu_available else "cpu"
-
-
 
 DOC_FOLDER = "/home/abradsha/Prompt-Classification/data/cleaned_policy_documents/"
 OUTPUT_FILE = "/home/abradsha/Prompt-Classification/data/outputs/word_label_bank.csv"
