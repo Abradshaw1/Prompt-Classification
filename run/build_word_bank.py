@@ -25,7 +25,7 @@ device = "cuda" if gpu_available else "cpu"
 
 DOC_FOLDER = "/home/abradsha/Prompt-Classification/data/cleaned_policy_documents/"
 OUTPUT_FILE = "/home/abradsha/Prompt-Classification/data/outputs/word_label_bank.csv"
-DEPARTMENT_LABELS = ["HR", "Legal", "Security", "Ethics and Compliance", "Government Relations"]
+DEPARTMENT_LABELS = ["HR", "Legal", "Security", "Ethics and Compliance", "Government Relations", "Safety"]
 logger.info("Loading models...")
 LEGAL_BERT_MODEL = "nlpaueb/legal-bert-base-uncased"
 SENTENCE_BERT_MODEL = "all-MiniLM-L6-v2"

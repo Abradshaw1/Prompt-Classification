@@ -7,7 +7,7 @@ import random
 import torch.nn.functional as F
 
 MODEL_NAME = "google/flan-t5-xl"  # Use 'flan-t5-xxl' for a larger model if GPU allows
-TEMPERATURE = 0.9  # Controls randomness (higher = more diverse outputs)
+TEMPERATURE = 0.95  # Controls randomness (higher = more diverse outputs)
 NUM_SAMPLES_PER_LABEL = 10  # Variants per label
 MAX_LENGTH = 300  # Max token length
 MIN_LENGTH = 5  # Ensures outputs are not too short
@@ -19,8 +19,9 @@ OUTPUT_FILE = "../data/outputs/generated_prompts.csv"
 INPUT_FILE = "../data/outputs/word_label_bank.csv"
 NUM_BEAMS = 1  # Beam search width
 #NUM_BEAM_GROUPS = 2  # Beam search
-JACCARD_THRESHOLD=0.95
+JACCARD_THRESHOLD=0.99
 # use jacacrd index
+MAX_ATTEMPTS = 10
 
 
 print("Checking GPU availability...")
@@ -40,6 +41,48 @@ print("Model loaded successfully.")
 device = "cuda" if gpu_available else "cpu"
 #model.to(device)
 print(f"Model successfully moved to {device.upper()}.")
+
+#----------------------------------------------for jaccard index----------------------------------------------
+MALICIOUS_ACTORS = [
+    "an experienced cybersecurity hacker",
+    "a savvy insider with technical expertise",
+    "a professional pentester",
+    "a novice attacker trying unconventional methods",
+    "a black-hat hacker",
+    "an advanced persistent threat operator",
+    "a rogue contractor with sensitive access",
+    "a cyber espionage agent",
+    "a determined attacker exploiting vulnerabilities",
+    "a malicious insider aiming to disrupt operations"
+]
+
+NON_MALICIOUS_ACTORS = [
+    "a diligent employee",
+    "an IT support specialist",
+    "a corporate communications expert",
+    "a business strategist",
+    "a system administrator",
+    "a human resources coordinator",
+    "a financial analyst",
+    "a compliance officer",
+    "a customer service representative",
+    "an operational efficiency expert"
+]
+
+VARIATION_INSTRUCTIONS_MALICIOUS = [
+    "Generate a new version with alternative phrasing and structure as {actor} to differentiate the query in the {department} domain.",
+    "Produce a distinct variation, adopting the style of {actor}, with fresh wording while staying in the {department} context.",
+    "Create an alternative version as {actor} with innovative synonyms and sentence patterns for the {department} domain."
+]
+
+VARIATION_INSTRUCTIONS_NON_MALICIOUS = [
+    "Now generate an alternative version with unique phrasing as {actor} that fits the {department} context.",
+    "Produce a distinct variation, in the style of {actor}, using different wording for the {department} domain.",
+    "Create a fresh version as {actor} with alternative phrasing while maintaining the context of {department}."
+]
+
+#----------------------------------------------for jaccard index----------------------------------------------
+
 
 
 df = pd.read_csv(INPUT_FILE)
@@ -66,7 +109,7 @@ def jaccard_similarity(prompt1, prompt2):
     return intersection / union if union != 0 else 0
 
 
-def generate_prompt_variations(department, word, phrase, department_words, malicious=True):
+def generate_prompt_variations(department, word, phrase, department_words, malicious=True, variation_instruction=""):
 
     # Strictly mix words **only within the same department**
     mixed_words = random.sample(department_words, min(len(department_words), 100))
@@ -131,6 +174,11 @@ def generate_prompt_variations(department, word, phrase, department_words, malic
         Now, generate {NUM_SAMPLES_PER_LABEL} **non-malicious** prompts that reflect **real employee use cases** in the **{department}** domain.
         """
 
+    if variation_instruction:
+        base_prompt += "\n" + variation_instruction
+    base_prompt += "\nGenerate the prompt now."
+    
+
     # Encode prompt into tokens
     inputs = tokenizer(base_prompt, return_tensors="pt").to(model.device)
 
@@ -174,32 +222,58 @@ for idx, row in df.iterrows():
 
     # Iterate over the already-generated prompts
     for text, confidence in malicious_texts:
+        attempts = 0
         while True:
             if not any(jaccard_similarity(text, existing) > JACCARD_THRESHOLD for existing in unique_prompts):
                 unique_prompts.append(text)
                 generated_prompts.append([prompt_id, text, 1, department, confidence, "Generated"])
+                logging.info(f"Final malicious prompt accepted after {attempts} attempts: {text}")
                 prompt_id += 1
                 break
             else:
+                attempts += 1
+                logging.info(f"Attempt {attempts} for malicious prompt in department '{department}': {text}")
+                if attempts >= MAX_ATTEMPTS:
+                    logging.error(f"Max attempts reached for malicious prompt in department '{department}'. Using current variant.")
+                    unique_prompts.append(text)
+                    generated_prompts.append([prompt_id, text, 1, department, confidence, "Generated"])
+                    prompt_id += 1
+                    break
                 logging.info(f"Discarded non-unique malicious prompt: {text}")
+                chosen_actor = random.choice(MALICIOUS_ACTORS)
+                var_inst = random.choice(VARIATION_INSTRUCTIONS_MALICIOUS).format(actor=chosen_actor, department=department)
+                logging.info(f"Using variation instruction: {var_inst}")
                 # Regenerate only if needed
-                text, confidence = generate_prompt_variations(department, word, phrase, department_words, malicious=True)[0]
+                text, confidence = generate_prompt_variations(department, word, phrase, department_words, malicious=True, variation_instruction=var_inst)[0]
 
     # Generate non-malicious prompts ONCE
     non_malicious_texts = generate_prompt_variations(department, word, phrase, department_words, malicious=False)
 
     # Iterate over the already-generated prompts
     for text, confidence in non_malicious_texts:
+        attempts = 0
         while True:
             if not any(jaccard_similarity(text, existing) > JACCARD_THRESHOLD for existing in unique_prompts):
                 unique_prompts.append(text)
                 generated_prompts.append([prompt_id, text, 0, "None", confidence, "Generated"])
+                logging.info(f"Final non-malicious prompt accepted after {attempts} attempts: {text}")
                 prompt_id += 1
                 break
             else:
-                # logging.info(f"Discarded non-unique non-malicious prompt: {text}")
+                attempts += 1
+                logging.info(f"Attempt {attempts} for non-malicious prompt in department '{department}': {text}")
+                if attempts >= MAX_ATTEMPTS:
+                    logging.error(f"Max attempts reached for non-malicious prompt in department '{department}'. Using current variant.")
+                    unique_prompts.append(text)
+                    generated_prompts.append([prompt_id, text, 0, "None", confidence, "Generated"])
+                    prompt_id += 1
+                    break
+                logging.info(f"Discarded non-unique non-malicious prompt: {text}")
+                chosen_actor = random.choice(NON_MALICIOUS_ACTORS)
+                var_inst = random.choice(VARIATION_INSTRUCTIONS_NON_MALICIOUS).format(actor=chosen_actor, department=department)
+                logging.info(f"Using variation instruction: {var_inst}")
                 # Regenerate only if needed
-                text, confidence = generate_prompt_variations(department, word, phrase, department_words, malicious=False)[0]
+                text, confidence = generate_prompt_variations(department, word, phrase, department_words, malicious=False, variation_instruction=var_inst)[0]
 
     # Log progress every 25 prompts
     if idx % BATCH_LOG_INTERVAL == 0:
