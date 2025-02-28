@@ -2,3 +2,7 @@ data/policy_documents/*
 !data/policy_documents/.gitkeep
 *.csv
 *.txt
+data/Manual/*
+!data/Manual/.gitkeep
+data/outputs/*
+!data/outputs/.gitkeep
