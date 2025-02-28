@@ -5,4 +5,5 @@ data/policy_documents/*
 data/Manual/*
 !data/Manual/.gitkeep
 data/outputs/*
-!data/outputs/.gitkeep
+!data/outputs/.gitkeepdata/outputs/*.npy
+data/outputs/*.csv
