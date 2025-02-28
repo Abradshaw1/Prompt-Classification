@@ -1,2 +1,4 @@
 data/policy_documents/*
 !data/policy_documents/.gitkeep
+*.csv
+*.txt
