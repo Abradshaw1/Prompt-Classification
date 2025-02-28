@@ -18,4 +18,4 @@ data/policy_documents/*
 !policy_documents/.gitkeep
 !EDA/.gitkeep
 !run/.gitkeep
-!run/deBerta/.gitkeep
+!run/deBerta/.gitkeepdata/outputs/validation_embeddings.npy
