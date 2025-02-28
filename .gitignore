@@ -2,8 +2,20 @@ data/policy_documents/*
 !data/policy_documents/.gitkeep
 *.csv
 *.txt
-data/Manual/*
+!data/
+!data/cleaned_policy_documents/
+!data/Manual/
+!data/outputs/
+!policy_documents/
+!EDA/
+!run/
+!run/deBerta/
+
+# Keep empty placeholder files so directories are retained
 !data/Manual/.gitkeep
-data/outputs/*
-!data/outputs/.gitkeepdata/outputs/*.npy
-data/outputs/*.csv
+!data/outputs/.gitkeep
+!data/cleaned_policy_documents/.gitkeep
+!policy_documents/.gitkeep
+!EDA/.gitkeep
+!run/.gitkeep
+!run/deBerta/.gitkeep
