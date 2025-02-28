@@ -1,4 +1,12 @@
 data/policy_documents/*
+data/outputs/*.csv
+data/outputs/*.txt
+data/outputs/*.npy
+data/outputs/*
+data/cleaned_policy_documents/*
+data/Manual/*
+data/outputs/*
+data/policy_documents
 !data/policy_documents/.gitkeep
 *.csv
 *.txt
@@ -18,4 +26,3 @@ data/policy_documents/*
 !policy_documents/.gitkeep
 !EDA/.gitkeep
 !run/.gitkeep
-!run/deBerta/.gitkeepdata/outputs/validation_embeddings.npy
