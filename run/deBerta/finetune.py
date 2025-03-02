@@ -12,11 +12,13 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger("DeBERTa LoRA Fine-Tuning")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 logger.info(f"Using device: {device}")
-
-
 df = pd.read_csv("../../data/FINAL_validated_prompts_with_similarity.csv")
 logger.info(f"Loaded dataset with {len(df)} rows.")
-tokenizer = AutoTokenizer.from_pretrained("microsoft/deberta-v3-large")
+
+# we may want to cosnider a big boy bert model, since we have enough trnaing data mabyye deBERTa-large
+MODEL_NAME = "protectai/deberta-v3-small-prompt-injection-v2"
+
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 
 def preprocess_function(examples):
     return tokenizer(examples["Prompt"], truncation=True, padding='max_length', max_length=256)
@@ -31,10 +33,9 @@ val_data = Dataset.from_dict({"Prompt": val_texts, "label": val_labels})
 train_data = train_data.map(preprocess_function, batched=True)
 val_data = val_data.map(preprocess_function, batched=True)
 
-base_model = AutoModelForSequenceClassification.from_pretrained(
-    "microsoft/deberta-v3-large", num_labels=2
-).to(device)
+base_model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME, num_labels=2).to(device)
 
+# LoRA config
 lora_config = LoraConfig(
     task_type=TaskType.SEQ_CLS,
     r=8,  # Low-rank factor
@@ -42,18 +43,20 @@ lora_config = LoraConfig(
     lora_dropout=0.1,
 )
 
+# Apply LoRA
 model = get_peft_model(base_model, lora_config).to(device)
 logger.info("DeBERTa LoRA model initialized.")
 
+# search the space here
 training_args = TrainingArguments(
     output_dir="./results",
     evaluation_strategy="epoch",
     save_strategy="epoch",
-    per_device_train_batch_size=16,
-    per_device_eval_batch_size=16,
+    per_device_train_batch_size=32,  # smaller model
+    per_device_eval_batch_size=32,
     num_train_epochs=5,
     weight_decay=0.01,
-    logging_dir="./logs",
+    logging_dir="./deberta_logs",
     load_best_model_at_end=True,
 )
 
@@ -72,25 +75,9 @@ trainer = Trainer(
     compute_metrics=compute_metrics,
 )
 
-
 logger.info("Starting Training...")
 trainer.train()
-
 model_path = "./deberta_lora_classifier"
 model.save_pretrained(model_path)
 tokenizer.save_pretrained(model_path)
 logger.info(f"Model saved to {model_path}")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
