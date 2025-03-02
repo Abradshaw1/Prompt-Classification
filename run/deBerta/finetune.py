@@ -49,15 +49,19 @@ logger.info("DeBERTa LoRA model initialized.")
 
 # search the space here
 training_args = TrainingArguments(
-    output_dir="./results",
+    output_dir="./results",  # Stores checkpoints per epoch
     evaluation_strategy="epoch",
-    save_strategy="epoch",
-    per_device_train_batch_size=32,  # smaller model
+    save_strategy="epoch",  # Saves after every epoch
+    per_device_train_batch_size=32,
     per_device_eval_batch_size=32,
     num_train_epochs=5,
     weight_decay=0.01,
-    logging_dir="./deberta_logs",
+    logging_dir="./deberta_logs",  # Logs will be saved here
+    logging_strategy="steps",  # Log metrics every few steps
+    logging_steps=50,  # Adjust this based on dataset size
+    save_total_limit=3,  # Keeps only the last 3 checkpoints
     load_best_model_at_end=True,
+    report_to="none",  # Disable WandB (if using)
 )
 
 def compute_metrics(eval_pred):
