@@ -1,0 +1,11 @@
+Department,Malicious Word,Phrase,Flag
+Legal,age,ethnic ity age sex gender,1
+HR,employment,employment,1
+Legal,based,and termination solely based,1
+Legal,law,law or regulations,1
+Security,corporation,corporation maintains a,1
+Ethics and Compliance,discipline,discipline,1
+Security,color,race color creed religion,1
+Legal,promptly,seriously respond promptly and will,1
+HR,applicants,all applicants,1
+
