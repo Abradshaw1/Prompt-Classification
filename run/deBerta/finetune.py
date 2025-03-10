@@ -20,8 +20,10 @@ MODEL_NAME = "protectai/deberta-v3-small-prompt-injection-v2"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 
+
 def preprocess_function(examples):
     return tokenizer(examples["Prompt"], truncation=True, padding='max_length', max_length=256)
+
 
 df["Malicious (0/1)"] = df["Malicious (0/1)"].astype(int)
 train_texts, val_texts, train_labels, val_labels = train_test_split(
