@@ -66,7 +66,9 @@ def predict(data, trainer):
     return labels, probs.numpy()
 
 
-model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME_1, num_labels=2)
+model = AutoModelForSequenceClassification \
+    .from_pretrained(MODEL_NAME_1, num_labels=2) \
+    .to(device)
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME_1, use_fast=False)
 
 df["Malicious (0/1)"] = df["Malicious (0/1)"].astype(int)
