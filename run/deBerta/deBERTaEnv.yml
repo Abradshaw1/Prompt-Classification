@@ -1,0 +1,12 @@
+name: deBERTa
+channels:
+  - defaults
+dependencies:
+  - pytorch
+  - torchvision
+  - conda-forge::transformers
+  - numpy
+  - anaconda::scikit-learn
+  - conda-forge::matplotlib
+  - conda-forge::datasets
+prefix: /opt/anaconda3/envs/deBERTa
