@@ -30,7 +30,7 @@ def preprocess_function(examples):
                      max_length=256)
 
 
-def trainer(model):
+def trainer():
     logger.info("Training model...")
 
     training_args = TrainingArguments(
@@ -93,7 +93,7 @@ model.save_pretrained(model_path)
 tokenizer.save_pretrained(model_path)
 logger.info(f"Model saved to {model_path}")
 
-labels, probs = predict(val_data, MODEL_NAME_1)
+labels, probs = predict(val_data, trainer)
 
 fpr, tpr, _ = roc_curve(labels, probs)
 roc_auc = auc(fpr, tpr)
