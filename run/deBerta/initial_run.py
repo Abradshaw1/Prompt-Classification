@@ -33,6 +33,7 @@ def preprocess_function(examples):
                      max_length=256) \
         .to(device)
 
+
 def compute_metrics(eval_pred):
     logits, labels = eval_pred
     predictions = torch.argmax(torch.tensor(logits), dim=-1)
@@ -134,7 +135,7 @@ plt.xlabel("False Positive Rate")
 plt.ylabel("True Positive Rate")
 plt.title("Receiver Operating Characteristic (ROC) Curve")
 plt.legend(loc="lower right")
-plt.savefig("roc_curve.png", dgitpi=300, bbox_inches="tight")
+plt.savefig("roc_curve.png", dpi=300, bbox_inches="tight")
 
 
 # Plot confusion matrix
