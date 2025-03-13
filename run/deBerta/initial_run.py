@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 from datasets import Dataset
 import torch.nn.functional as F
+from peft import get_peft_model, LoraConfig, TaskType
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("DeBERTa Initial Runs")
@@ -27,7 +28,8 @@ def preprocess_function(examples):
     return tokenizer(examples["Prompt"],
                      truncation=True,
                      padding='max_length',
-                     max_length=256)
+                     max_length=256) \
+        .to(device)
 
 
 def trainer():
@@ -66,9 +68,21 @@ def predict(data, trainer):
     return labels, probs.numpy()
 
 
-model = AutoModelForSequenceClassification \
+base_model = AutoModelForSequenceClassification \
     .from_pretrained(MODEL_NAME_1, num_labels=2) \
     .to(device)
+
+lora_config = LoraConfig(
+    task_type=TaskType.SEQ_CLS,
+    r=8,  # Low-rank factor
+    lora_alpha=16,  # Scaling factor
+    lora_dropout=0.1,
+)
+
+# Apply LoRA
+model = get_peft_model(base_model, lora_config).to(device)
+logger.info("DeBERTa LoRA model initialized.")
+
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME_1, use_fast=False)
 
 df["Malicious (0/1)"] = df["Malicious (0/1)"].astype(int)
@@ -85,12 +99,10 @@ train_data = train_data.map(preprocess_function, batched=True)
 val_data = val_data.map(preprocess_function, batched=True)
 
 
-logger.info("Starting Initial Runs...")
-
 trainer = trainer()
 trainer.train()
 
-model_path = "./deberta_base_classifier"
+model_path = "./deberta_lora_classifier"
 model.save_pretrained(model_path)
 tokenizer.save_pretrained(model_path)
 logger.info(f"Model saved to {model_path}")
