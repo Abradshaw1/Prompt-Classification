@@ -5,9 +5,10 @@ import torch
 import pandas as pd
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
 import numpy as np
-from sklearn.metrics import roc_curve, auc
+from sklearn.metrics import roc_curve, auc, confusion_matrix, accuracy_score, precision_recall_fscore_support
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
+import seaborn as sns
 from datasets import Dataset
 import torch.nn.functional as F
 from peft import get_peft_model, LoraConfig, TaskType
@@ -31,6 +32,13 @@ def preprocess_function(examples):
                      padding='max_length',
                      max_length=256) \
         .to(device)
+
+def compute_metrics(eval_pred):
+    logits, labels = eval_pred
+    predictions = torch.argmax(torch.tensor(logits), dim=-1)
+    precision, recall, f1, _ = precision_recall_fscore_support(labels, predictions, average='binary')
+    acc = accuracy_score(labels, predictions)
+    return {"accuracy": acc, "f1": f1, "precision": precision, "recall": recall}
 
 
 def trainer():
@@ -56,7 +64,8 @@ def trainer():
             model=model,
             args=training_args,
             train_dataset=train_data,
-            eval_dataset=val_data
+            eval_dataset=val_data,
+            compute_metrics=compute_metrics
             )
 
 
@@ -113,6 +122,8 @@ labels, probs = predict(val_data, trainer)
 fpr, tpr, _ = roc_curve(labels, probs)
 roc_auc = auc(fpr, tpr)
 
+cm = confusion_matrix(val_labels, labels)
+
 # Plot the ROC curve
 plt.figure(figsize=(8, 6))
 plt.plot(fpr, tpr, color="blue", lw=2, label=f"ROC Curve (AUC = {roc_auc:.2f})")
@@ -124,3 +135,13 @@ plt.ylabel("True Positive Rate")
 plt.title("Receiver Operating Characteristic (ROC) Curve")
 plt.legend(loc="lower right")
 plt.savefig("roc_curve.png", dgitpi=300, bbox_inches="tight")
+
+
+# Plot confusion matrix
+
+plt.figure(figsize=(6, 5))
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["0", "1"], yticklabels=["0", "1"])
+plt.xlabel("Predicted Label")
+plt.ylabel("True Label")
+plt.title("Confusion Matrix")
+plt.savefig("confusion_matrix.png", dpi=300, bbox_inches="tight")
