@@ -37,11 +37,11 @@ def trainer():
 
     training_args = TrainingArguments(
         output_dir="./results",  # Stores checkpoints per epoch
-        evaluation_strategy="epoch",
+        eval_strategy="epoch",
         save_strategy="epoch",  # Saves after every epoch
-        per_device_train_batch_size=32,
-        per_device_eval_batch_size=32,
-        num_train_epochs=5,
+        per_device_train_batch_size=8,
+        per_device_eval_batch_size=8,
+        num_train_epochs=1,
         weight_decay=0.01,
         logging_dir="./deberta_logs",  # Logs will be saved here
         logging_strategy="steps",  # Log metrics every few steps
