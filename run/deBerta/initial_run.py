@@ -19,8 +19,9 @@ logger.info(f"Using device: {device}")
 df = pd.read_csv("./data/FINAL_validated_prompts_with_similarity_deBERTa.csv")
 logger.info(f"Loaded dataset with {len(df)} rows.")
 
-MODEL_NAME_1 = "microsoft/deberta-v3-base"
-MODEL_NAME_2 = "microsoft/deberta-v3-large"
+MODEL_NAME_1 = "microsoft/deberta-v3-small"
+MODEL_NAME_2 = "microsoft/deberta-v3-base"
+MODEL_NAME_3 = "microsoft/deberta-v3-large"
 
 
 def preprocess_function(examples):
