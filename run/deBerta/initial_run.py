@@ -110,7 +110,7 @@ def predict(data):
     # Get predicted labels (highest probability class)
     predicted_labels = np.argmax(probs, axis=-1)
     true_labels = np.array(predictions.label_ids)
-    
+
     return true_labels, predicted_labels, probs[:, 1]
 
 
@@ -125,8 +125,6 @@ train_texts, val_texts, train_labels, val_labels = train_test_split(
     random_state=42
     )
 
-val_texts = val_texts[:1000]
-val_labels = val_labels[:1000]
 train_data = Dataset.from_dict({"Prompt": train_texts, "label": train_labels})
 val_data = Dataset.from_dict({"Prompt": val_texts, "label": val_labels})
 train_data = train_data.map(preprocess_function, batched=True)
@@ -180,7 +178,7 @@ plt.xlabel("False Positive Rate")
 plt.ylabel("True Positive Rate")
 plt.title("Receiver Operating Characteristic (ROC) Curve")
 plt.legend(loc="lower right")
-plt.savefig("roc_curve_baseline3.png", dpi=300, bbox_inches="tight")
+plt.savefig("roc_curve_baseline_full.png", dpi=300, bbox_inches="tight")
 
 
 # Plot confusion matrix
@@ -190,4 +188,4 @@ sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["0", "1"], ytick
 plt.xlabel("Predicted Label")
 plt.ylabel("True Label")
 plt.title("Confusion Matrix")
-plt.savefig("confusion_matrix_baseline3.png", dpi=300, bbox_inches="tight")
+plt.savefig("confusion_matrix_baseline_full.png", dpi=300, bbox_inches="tight")
