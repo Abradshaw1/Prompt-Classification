@@ -180,7 +180,7 @@ plt.xlabel("False Positive Rate")
 plt.ylabel("True Positive Rate")
 plt.title("Receiver Operating Characteristic (ROC) Curve")
 plt.legend(loc="lower right")
-plt.savefig("roc_curve_baseline4.png", dpi=300, bbox_inches="tight")
+plt.savefig("roc_curve_baseline3.png", dpi=300, bbox_inches="tight")
 
 
 # Plot confusion matrix
@@ -190,4 +190,4 @@ sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["0", "1"], ytick
 plt.xlabel("Predicted Label")
 plt.ylabel("True Label")
 plt.title("Confusion Matrix")
-plt.savefig("confusion_matrix_baseline4.png", dpi=300, bbox_inches="tight")
+plt.savefig("confusion_matrix_baseline3.png", dpi=300, bbox_inches="tight")
