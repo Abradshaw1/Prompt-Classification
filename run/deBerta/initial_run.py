@@ -5,7 +5,7 @@ import torch
 import pandas as pd
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
 import numpy as np
-from sklearn.metrics import roc_curve, auc, confusion_matrix, accuracy_score, precision_recall_fscore_support
+from sklearn.metrics import roc_curve, auc, confusion_matrix, accuracy_score, precision_recall_fscore_support, precision_score, recall_score, f1_score, roc_auc_score
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -68,7 +68,8 @@ def trainer():
             eval_dataset=val_data,
             compute_metrics=compute_metrics
             )
-"""
+
+
 
 def predict(data):
     logger.info("Evaluating model...")
@@ -79,7 +80,6 @@ def predict(data):
     pred_labels = np.argmax(probs, axis=-1)
     return pred_labels, probs, metrics
 
-"""
 base_model = AutoModelForSequenceClassification \
     .from_pretrained(MODEL_NAME_1, num_labels=2) \
     .to(device)
@@ -96,7 +96,21 @@ model = get_peft_model(base_model, lora_config).to(device)
 logger.info("DeBERTa LoRA model initialized.")
 """
 
+
+def predict(data):
+    logger.info("Evaluating model...")
+    with torch.no_grad():
+        outputs = model(**data)
+    logits = outputs.logits
+    probs = torch.nn.functional.softmax(logits, dim=-1).cpu().numpy()
+
+    predicted_classes = np.argmax(probs, axis=-1)
+
+    return predicted_classes, probs[:, 1]
+
+
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME_1, use_fast=False)
+
 
 df["Malicious (0/1)"] = df["Malicious (0/1)"].astype(int)
 train_texts, val_texts, train_labels, val_labels = train_test_split(
@@ -106,10 +120,13 @@ train_texts, val_texts, train_labels, val_labels = train_test_split(
     random_state=42
     )
 
+val_texts = val_texts[:1000]
+val_labels = val_labels[:1000]
 train_data = Dataset.from_dict({"Prompt": train_texts, "label": train_labels})
 val_data = Dataset.from_dict({"Prompt": val_texts, "label": val_labels})
 train_data = train_data.map(preprocess_function, batched=True)
 val_data = val_data.map(preprocess_function, batched=True)
+
 
 """
 trainer = trainer()
@@ -126,12 +143,24 @@ model_path = "./deberta_lora_classifier"
 model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME_1, num_labels=2)
 
 # Define test trainer
-test_trainer = Trainer(model)
+#test_trainer = Trainer(model)
 
-labels, probs, metrics = predict(val_data)
-print(metrics)
+labels, probs = predict(val_data)
 
-fpr, tpr, _ = roc_curve(labels, probs)
+accuracy = accuracy_score(val_labels, labels)
+precision = precision_score(val_labels, labels)
+recall = recall_score(val_labels, labels)
+f1 = f1_score(val_labels, labels)
+auc_val = roc_auc_score(val_labels, labels)  # Use probabilities for AUC
+
+# Print results
+print(f"Accuracy: {accuracy:.4f}")
+print(f"Precision: {precision:.4f}")
+print(f"Recall: {recall:.4f}")
+print(f"F1 Score: {f1:.4f}")
+print(f"AUC Score: {auc_val:.4f}")
+
+fpr, tpr, _ = roc_curve(val_labels, probs)
 roc_auc = auc(fpr, tpr)
 
 cm = confusion_matrix(val_labels, labels)
@@ -146,7 +175,7 @@ plt.xlabel("False Positive Rate")
 plt.ylabel("True Positive Rate")
 plt.title("Receiver Operating Characteristic (ROC) Curve")
 plt.legend(loc="lower right")
-plt.savefig("roc_curve_baseline3.png", dpi=300, bbox_inches="tight")
+plt.savefig("roc_curve_baseline4.png", dpi=300, bbox_inches="tight")
 
 
 # Plot confusion matrix
@@ -156,4 +185,4 @@ sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["0", "1"], ytick
 plt.xlabel("Predicted Label")
 plt.ylabel("True Label")
 plt.title("Confusion Matrix")
-plt.savefig("confusion_matrix_baseline3.png", dpi=300, bbox_inches="tight")
+plt.savefig("confusion_matrix_baseline4.png", dpi=300, bbox_inches="tight")
