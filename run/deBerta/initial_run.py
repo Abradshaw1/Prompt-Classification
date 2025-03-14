@@ -76,7 +76,7 @@ def predict(data):
     metrics = predictions.metrics
     logits = predictions.predictions
     probs = torch.nn.functional.softmax(torch.tensor(logits), dim=-1)[:, 1]  # Get positive class probability
-    pred_labels = torch.round(torch.nn.sigmoid(logits))
+    pred_labels = torch.round(torch.nn.Sigmoid(logits))
     return pred_labels, probs.numpy(), metrics
 
 """
