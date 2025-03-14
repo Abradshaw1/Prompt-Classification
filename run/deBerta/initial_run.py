@@ -99,14 +99,18 @@ logger.info("DeBERTa LoRA model initialized.")
 
 def predict(data):
     logger.info("Evaluating model...")
-    with torch.no_grad():
-        outputs = model(**data)
-    logits = outputs.logits
-    probs = torch.nn.functional.softmax(logits, dim=-1).cpu().numpy()
+    predictions = test_trainer.predict(data)  # Uses trainer.predict() on Dataset
 
-    predicted_classes = np.argmax(probs, axis=-1)
+    # Extract logits
+    logits = torch.tensor(predictions.predictions)
 
-    return predicted_classes, probs[:, 1]
+    # Convert logits to probabilities (Softmax for multi-class, Sigmoid for binary)
+    probs = torch.nn.functional.softmax(logits, dim=-1).numpy()  # Use softmax for multi-class
+
+    # Get predicted labels (highest probability class)
+    predicted_labels = np.argmax(probs, axis=-1)
+
+    return predicted_labels, probs[:, 1]
 
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME_1, use_fast=False)
@@ -143,7 +147,7 @@ model_path = "./deberta_lora_classifier"
 model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME_1, num_labels=2)
 
 # Define test trainer
-#test_trainer = Trainer(model)
+test_trainer = Trainer(model)
 
 labels, probs = predict(val_data)
 
