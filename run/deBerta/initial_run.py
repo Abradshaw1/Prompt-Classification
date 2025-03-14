@@ -74,10 +74,10 @@ def predict(data):
     logger.info("Evaluating model...")
     predictions = test_trainer.predict(data)
     metrics = predictions.metrics
-    logits = predictions.predictions
-    probs = torch.nn.functional.softmax(torch.tensor(logits), dim=-1)[:, 1]  # Get positive class probability
+    logits = torch.tensor(predictions.predictions)
+    probs = torch.nn.functional.softmax(logits, dim=-1).numpy()
     pred_labels = np.argmax(probs, axis=-1)
-    return pred_labels, probs.numpy(), metrics
+    return pred_labels, probs, metrics
 
 """
 base_model = AutoModelForSequenceClassification \
