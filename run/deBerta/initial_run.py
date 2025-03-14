@@ -109,8 +109,9 @@ def predict(data):
 
     # Get predicted labels (highest probability class)
     predicted_labels = np.argmax(probs, axis=-1)
-
-    return predicted_labels, probs[:, 1]
+    true_labels = np.array(predictions.label_ids)
+    
+    return true_labels, predicted_labels, probs[:, 1]
 
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME_1, use_fast=False)
@@ -149,13 +150,13 @@ model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME_1, num_lab
 # Define test trainer
 test_trainer = Trainer(model)
 
-labels, probs = predict(val_data)
+tru_labels, pred_labels, probs = predict(val_data)
 
-accuracy = accuracy_score(val_labels, labels)
-precision = precision_score(val_labels, labels)
-recall = recall_score(val_labels, labels)
-f1 = f1_score(val_labels, labels)
-auc_val = roc_auc_score(val_labels, labels)  # Use probabilities for AUC
+accuracy = accuracy_score(tru_labels, pred_labels)
+precision = precision_score(tru_labels, pred_labels)
+recall = recall_score(tru_labels, pred_labels)
+f1 = f1_score(tru_labels, pred_labels)
+auc_val = roc_auc_score(tru_labels, probs)  # Use probabilities for AUC
 
 # Print results
 print(f"Accuracy: {accuracy:.4f}")
@@ -167,7 +168,7 @@ print(f"AUC Score: {auc_val:.4f}")
 fpr, tpr, _ = roc_curve(val_labels, probs)
 roc_auc = auc(fpr, tpr)
 
-cm = confusion_matrix(val_labels, labels)
+cm = confusion_matrix(tru_labels, pred_labels)
 
 # Plot the ROC curve
 plt.figure(figsize=(8, 6))
