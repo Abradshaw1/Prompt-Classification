@@ -33,7 +33,7 @@ def preprocess_function(examples):
                      max_length=256) \
         .to(device)
 
-
+"""
 def compute_metrics(eval_pred):
     logits, labels = eval_pred
     predictions = torch.argmax(torch.tensor(logits), dim=-1)
@@ -68,17 +68,18 @@ def trainer():
             eval_dataset=val_data,
             compute_metrics=compute_metrics
             )
+"""
 
 
-def predict(data, trainer):
+def predict(data):
     logger.info("Evaluating model...")
-    predictions = trainer.predict(data)
-    logits = predictions.predictions
-    probs = torch.nn.functional.softmax(torch.tensor(logits), dim=-1)[:, 1]  # Get positive class probability
-    labels = np.array(predictions.label_ids)
-    return labels, probs.numpy()
+    predictions = test_trainer.predict(data)
+    logits = torch.tensor(predictions.predictions)
+    probs = torch.nn.functional.softmax(logits, dim=-1).numpy()
+    labels = np.argmax(probs, axis=-1)
+    return labels, probs
 
-
+"""
 base_model = AutoModelForSequenceClassification \
     .from_pretrained(MODEL_NAME_1, num_labels=2) \
     .to(device)
@@ -93,6 +94,7 @@ lora_config = LoraConfig(
 # Apply LoRA
 model = get_peft_model(base_model, lora_config).to(device)
 logger.info("DeBERTa LoRA model initialized.")
+"""
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME_1, use_fast=False)
 
@@ -109,7 +111,7 @@ val_data = Dataset.from_dict({"Prompt": val_texts, "label": val_labels})
 train_data = train_data.map(preprocess_function, batched=True)
 val_data = val_data.map(preprocess_function, batched=True)
 
-
+"""
 trainer = trainer()
 trainer.train()
 
@@ -117,8 +119,16 @@ model_path = "./deberta_lora_classifier"
 model.save_pretrained(model_path)
 tokenizer.save_pretrained(model_path)
 logger.info(f"Model saved to {model_path}")
+"""
 
-labels, probs = predict(val_data, trainer)
+
+model_path = "./deberta_lora_classifier"
+model = AutoModelForSequenceClassification.from_pretrained(model_path, num_labels=2)
+
+# Define test trainer
+test_trainer = Trainer(model)
+
+labels, probs = predict(val_data)
 
 fpr, tpr, _ = roc_curve(labels, probs)
 roc_auc = auc(fpr, tpr)
@@ -135,7 +145,7 @@ plt.xlabel("False Positive Rate")
 plt.ylabel("True Positive Rate")
 plt.title("Receiver Operating Characteristic (ROC) Curve")
 plt.legend(loc="lower right")
-plt.savefig("roc_curve.png", dpi=300, bbox_inches="tight")
+plt.savefig("roc_curve_redo.png", dpi=300, bbox_inches="tight")
 
 
 # Plot confusion matrix
@@ -145,4 +155,4 @@ sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["0", "1"], ytick
 plt.xlabel("Predicted Label")
 plt.ylabel("True Label")
 plt.title("Confusion Matrix")
-plt.savefig("confusion_matrix.png", dpi=300, bbox_inches="tight")
+plt.savefig("confusion_matrix_redo.png", dpi=300, bbox_inches="tight")
