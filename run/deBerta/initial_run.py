@@ -73,10 +73,11 @@ def trainer():
 def predict(data):
     logger.info("Evaluating model...")
     predictions = test_trainer.predict(data)
+    metrics = predictions.metrics
     logits = predictions.predictions
     probs = torch.nn.functional.softmax(torch.tensor(logits), dim=-1)[:, 1]  # Get positive class probability
-    labels = np.array(predictions.label_ids)
-    return labels, probs.numpy()
+    pred_labels = np.argmax(logits, axis=-1)
+    return pred_labels, probs.numpy(), metrics
 
 """
 base_model = AutoModelForSequenceClassification \
@@ -127,7 +128,8 @@ model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME_1, num_lab
 # Define test trainer
 test_trainer = Trainer(model)
 
-labels, probs = predict(val_data)
+labels, probs, metrics = predict(val_data)
+print(metrics)
 
 fpr, tpr, _ = roc_curve(labels, probs)
 roc_auc = auc(fpr, tpr)
@@ -144,7 +146,7 @@ plt.xlabel("False Positive Rate")
 plt.ylabel("True Positive Rate")
 plt.title("Receiver Operating Characteristic (ROC) Curve")
 plt.legend(loc="lower right")
-plt.savefig("roc_curve_baseline.png", dpi=300, bbox_inches="tight")
+plt.savefig("roc_curve_baseline2.png", dpi=300, bbox_inches="tight")
 
 
 # Plot confusion matrix
@@ -154,4 +156,4 @@ sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=["0", "1"], ytick
 plt.xlabel("Predicted Label")
 plt.ylabel("True Label")
 plt.title("Confusion Matrix")
-plt.savefig("confusion_matrix_baseline.png", dpi=300, bbox_inches="tight")
+plt.savefig("confusion_matrix_baseline2.png", dpi=300, bbox_inches="tight")
