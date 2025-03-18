@@ -33,7 +33,7 @@ def preprocess_function(examples):
                      max_length=256) \
         .to(device)
 
-"""
+
 def compute_metrics(eval_pred):
     logits, labels = eval_pred
     predictions = torch.argmax(torch.tensor(logits), dim=-1)
@@ -69,8 +69,7 @@ def trainer():
             compute_metrics=compute_metrics
             )
 
-
-
+"""
 def predict(data):
     logger.info("Evaluating model...")
     predictions = test_trainer.predict(data)
@@ -79,6 +78,7 @@ def predict(data):
     probs = torch.nn.functional.softmax(logits, dim=-1).numpy()
     pred_labels = np.argmax(probs, axis=-1)
     return pred_labels, probs, metrics
+"""
 
 base_model = AutoModelForSequenceClassification \
     .from_pretrained(MODEL_NAME_1, num_labels=2) \
@@ -94,7 +94,6 @@ lora_config = LoraConfig(
 # Apply LoRA
 model = get_peft_model(base_model, lora_config).to(device)
 logger.info("DeBERTa LoRA model initialized.")
-"""
 
 
 def predict(data):
@@ -131,7 +130,6 @@ train_data = train_data.map(preprocess_function, batched=True)
 val_data = val_data.map(preprocess_function, batched=True)
 
 
-"""
 trainer = trainer()
 trainer.train()
 
@@ -139,7 +137,6 @@ model_path = "./deberta_lora_classifier"
 model.save_pretrained(model_path)
 tokenizer.save_pretrained(model_path)
 logger.info(f"Model saved to {model_path}")
-"""
 
 
 model_path = "./deberta_lora_classifier"
