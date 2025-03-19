@@ -240,10 +240,10 @@ def main():
     # Initialize and train classifier
     classifier = PromptClassifier()
     train_data, val_data = classifier.prepare_datasets(balanced_df)
-    logger.info(f"Training: {sum(train_data['Malicious (0/1)'] == 1)} malicious prompts")
-    logger.info(f"Training: {sum(train_data['Malicious (0/1)'] == 0)} benign prompts")
-    logger.info(f"Validation: {sum(val_data['Malicious (0/1)'] == 1)} malicious prompts")
-    logger.info(f"Validation: {sum(val_data['Malicious (0/1)'] == 0)} benign prompts")
+    logger.info(f"Training: {sum(train_data['label'] == 1)} malicious prompts")
+    logger.info(f"Training: {sum(train_data['label'] == 0)} benign prompts")
+    logger.info(f"Validation: {sum(val_data['label'] == 1)} malicious prompts")
+    logger.info(f"Validation: {sum(val_data['label'] == 0)} benign prompts")
     
     logger.info("Starting fine-tuning...")
     classifier.train(train_data, val_data)
