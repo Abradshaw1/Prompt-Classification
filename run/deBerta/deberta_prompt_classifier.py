@@ -16,7 +16,7 @@ from sklearn.metrics import (
 from sklearn.model_selection import train_test_split
 from transformers import (
     AutoTokenizer, AutoModelForSequenceClassification,
-    Trainer, TrainingArguments
+    Trainer, TrainingArguments, EarlyStoppingCallback
 )
 from peft import get_peft_model, LoraConfig, TaskType
 
@@ -24,9 +24,9 @@ from peft import get_peft_model, LoraConfig, TaskType
 MODEL_NAME = "microsoft/deberta-v3-small"
 MAX_LENGTH = 256
 BATCH_SIZE = 8
-NUM_EPOCHS = 1
+NUM_EPOCHS = 100
 WEIGHT_DECAY = 0.01
-MODEL_SAVE_PATH = "./deberta_lora_classifier"
+MODEL_SAVE_PATH = "./deberta_lora_classifier2"
 
 # Setup logging
 logging.basicConfig(
@@ -54,7 +54,7 @@ class PromptClassifier:
             task_type=TaskType.SEQ_CLS,
             r=8,
             lora_alpha=16,
-            lora_dropout=0.1,
+            lora_dropout=0.1
         )
         self.model = get_peft_model(self.base_model, lora_config).to(device)
         logger.info("DeBERTa LoRA model initialized.")
@@ -123,7 +123,15 @@ class PromptClassifier:
             logging_steps=50,
             save_total_limit=3,
             load_best_model_at_end=True,
+            metric_for_best_model="eval_loss",
+            greater_is_better=False,
+            evaluation_strategy="epoch",
             report_to="none"
+        )
+
+        early_stopping_callback = EarlyStoppingCallback(
+            early_stopping_patience=3,
+            early_stopping_threshold=0.0
         )
 
         trainer = Trainer(
@@ -131,7 +139,8 @@ class PromptClassifier:
             args=training_args,
             train_dataset=train_data,
             eval_dataset=val_data,
-            compute_metrics=self.compute_metrics
+            compute_metrics=self.compute_metrics,
+            callbacks=[early_stopping_callback]
         )
 
         trainer.train()
@@ -164,7 +173,7 @@ class PromptClassifier:
         # ROC Curve
         fpr, tpr, _ = roc_curve(true_labels, probs)
         roc_auc = auc(fpr, tpr)
-        
+
         plt.figure(figsize=(8, 6))
         plt.plot(
             fpr, tpr, color="blue", lw=2,
@@ -209,14 +218,38 @@ def main():
         "./data/FINAL_validated_prompts_with_similarity_deBERTa.csv"
     )
     df["Malicious (0/1)"] = df["Malicious (0/1)"].astype(int)
-    logger.info(f"Loaded dataset with {len(df)} rows.")
+
+    # Separate malicious and benign prompts
+    malicious_prompts = df[df["Malicious (0/1)"] == 1]
+    benign_prompts = df[df["Malicious (0/1)"] == 0]
+
+    # Randomly sample 3000 prompts from each class
+    malicious_sample = malicious_prompts.sample(n=3000, random_state=42)
+    benign_sample = benign_prompts.sample(n=3000, random_state=42)
+
+    # Combine the samples
+    balanced_df = pd.concat([malicious_sample, benign_sample])
+    # Shuffle the combined dataset
+    balanced_df = balanced_df.sample(frac=1, random_state=42) \
+        .reset_index(drop=True)
+
+    logger.info(f"Created balanced dataset with {len(balanced_df)} rows")
+    logger.info(f"Number of malicious prompts: {sum(balanced_df['Malicious (0/1)'] == 1)}")
+    logger.info(f"Number of benign prompts: {sum(balanced_df['Malicious (0/1)'] == 0)}")
 
     # Initialize and train classifier
     classifier = PromptClassifier()
-    train_data, val_data = classifier.prepare_datasets(df)
+    train_data, val_data = classifier.prepare_datasets(balanced_df)
+    logger.info(f"Training: {sum(train_data['Malicious (0/1)'] == 1)} malicious prompts")
+    logger.info(f"Training: {sum(train_data['Malicious (0/1)'] == 0)} benign prompts")
+    logger.info(f"Validation: {sum(val_data['Malicious (0/1)'] == 1)} malicious prompts")
+    logger.info(f"Validation: {sum(val_data['Malicious (0/1)'] == 0)} benign prompts")
+    
+    logger.info("Starting fine-tuning...")
     classifier.train(train_data, val_data)
 
     # Evaluate and plot results
+    logger.info("Evaluating...")
     true_labels, pred_labels, probs = classifier.evaluate(val_data)
 
     # Print metrics
