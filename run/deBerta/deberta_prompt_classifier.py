@@ -187,7 +187,7 @@ class PromptClassifier:
         plt.title("Receiver Operating Characteristic (ROC) Curve")
         plt.legend(loc="lower right")
         plt.savefig(
-            "roc_curve_baseline_full.png",
+            "roc_curve_lora.png",
             dpi=300,
             bbox_inches="tight"
         )
@@ -204,7 +204,7 @@ class PromptClassifier:
         plt.ylabel("True Label")
         plt.title("Confusion Matrix")
         plt.savefig(
-            "confusion_matrix_baseline_full.png",
+            "confusion_matrix_lora.png",
             dpi=300,
             bbox_inches="tight"
         )
@@ -240,10 +240,10 @@ def main():
     # Initialize and train classifier
     classifier = PromptClassifier()
     train_data, val_data = classifier.prepare_datasets(balanced_df)
-    logger.info(f"Training: {sum(train_data['label'] == 1)} malicious prompts")
-    logger.info(f"Training: {sum(train_data['label'] == 0)} benign prompts")
-    logger.info(f"Validation: {sum(val_data['label'] == 1)} malicious prompts")
-    logger.info(f"Validation: {sum(val_data['label'] == 0)} benign prompts")
+    logger.info(f"Training: {sum(int(train_data['label']) == 1)} malicious prompts")
+    logger.info(f"Training: {sum(int(train_data['label']) == 0)} benign prompts")
+    logger.info(f"Validation: {sum(int(val_data['label']) == 1)} malicious prompts")
+    logger.info(f"Validation: {sum(int(val_data['label']) == 0)} benign prompts")
     
     logger.info("Starting fine-tuning...")
     classifier.train(train_data, val_data)
