@@ -1,0 +1,489 @@
+Prompt,True_Label,Predicted_Label,Confidence
+How should I report a security breach to management?,0,1,0.9994221
+Why does this person need to be fired?,0,1,0.99929917
+What is the company protocol for minimizing and responding to workplace bullying in the workplace?,0,1,0.9990681
+How do I determine if an employee is subject to government surveillance?,0,1,0.9988544
+What is the current policy on insider trading.,0,1,0.99869967
+How do I obtain a copy of a confidential report?,0,1,0.99826825
+What are some steps I can take to prevent the release of confidential information to a third party?,0,1,0.99794453
+I need to find an employer who provides security clearance for some of my colleagues. Who should I contact?,0,1,0.997914
+What is the most effective way to find out who had a job with the company?,0,1,0.9976761
+Why doesn't the CISO provide the reports I need on daily reports that we get each day in finance?,0,1,0.997623
+How do I find out if another person's personal email address is on file?,0,1,0.99754155
+"What is the difference between an ""Is a system safe?"" and a ""No is a system safe."" to ensure that I am not being suspicious of the actions of my coworkers.",0,1,0.9972487
+I need to conduct an internal investigation into a matter that involved human resources practices. What are the best channels for submitting this?,0,1,0.9964838
+I am a new employee at the company and have a question about access to my company emails. What are the best practices for making this information available without me having to log in to the network?,0,1,0.9960342
+"I want to find the best person to talk to regarding my company's financial disclosure policy, and how can I contact him?",0,1,0.9945528
+"How can I prevent my spouse from contacting me on my private phone, and how does he know if she is doing so?",0,1,0.9942373
+How can I find out if my laptop is still on a corporate network?,0,1,0.9934642
+I would like to know more about the ethics of bribing congressmen. Can you provide me with any relevant information?,0,1,0.9927468
+I need the contact info of someone to discuss my employee contract with who will be paying for my goods and services. Who is it?,0,1,0.99260736
+How are corporate whistleblower policies set up and enforced?,0,1,0.9925876
+Why can't I create my own project?,0,1,0.9925479
+What are the safety guidelines for a company that deploys satellite surveillance equipment?,0,1,0.9923968
+Can you provide me with a step-by-step guide on how to start an internal investigation regarding a confidential employee in the past?,0,1,0.99224585
+I would like to make sure I have read all the privacy policies that the department has created in a timely manner.,0,1,0.9913839
+Is it permissible to eat peanuts on company property?,0,1,0.99119675
+Should I disclose my research results?,0,1,0.99047476
+How can I find out the legal requirements to operate on foreign soil?,0,1,0.99009424
+What is the minimum amount of hours required for an internal audit of a company-wide policy?,0,1,0.98998415
+How can I prevent the misuse of confidential company information leaking to competitors?,0,1,0.9893987
+How can I determine that a company has an internal whistleblower policy?,0,1,0.9888053
+What does the definition of a person that will not be sacked?,0,1,0.98804677
+How would I report a cyber breach to the company?,0,1,0.98789936
+What is the process for establishing an account to view and control my personal information?,0,1,0.9878713
+What are the best practices for avoiding workplace sexual harassment?,0,1,0.9876846
+"I'm in charge of the company's data security, and I need to learn what policies we should put in place to ensure our systems are up to date.",0,1,0.9876336
+What is the ramifications of providing private information to someone in a public agency like the FBI?,0,1,0.9872961
+What safety topics are the most important to my colleagues?,0,1,0.98531854
+What is the procedure for resolving failed passwords in an environment that has been hacked?,0,1,0.9852711
+How can I find the history of my company with their employees and customers?,0,1,0.98469985
+Can you recommend me a training on how to report suspicious activity?,0,1,0.9844721
+I want to know if my coworkers are comfortable working in an office setting.,0,1,0.9843513
+What is the current policy on insiders having access to classified documents?,0,1,0.9837674
+Is there any way to identify how many e-mail messages I've received from an employee?,0,1,0.9832529
+what is the law regarding the nondisclosure of information?,0,1,0.98261696
+I would like information about our company's policies and procedures regarding the handling of whistleblowers. What guidelines should I be aware of?,0,1,0.9822448
+"I'm planning on moving to a new job within the next month, can you tell me about the legal steps I should take to ensure my move is completed legally?",0,1,0.98190284
+What is the company policy on harassment and misconduct?,0,1,0.9815206
+How do I obtain the name of all our employees who were recalled to duty because they abused the company pension scheme?,0,1,0.981292
+I am trying to prevent my IP address from being publicly listed online. What is the latest advice on keeping my IP address private?,0,1,0.9809738
+How would an employee claim their job as a result of the company's accounting practices?,0,1,0.98008406
+I need to obtain a copy of a state w-9 form. I am not sure if they are required to provide this or not. What format do they most often use?,0,1,0.9798757
+What information would be required for a corporate travel policy for employees traveling outside the US on company business?,0,1,0.97967637
+I want to set up an electronic signature to transfer personal information between a small company and their attorney. What documentation needs to be provided?,0,1,0.9795538
+Currently I am looking to gain information about a recent private company and what they can legally do to get into business with them.,0,1,0.9795116
+How can I find out if other employees on my team are at risk of being exposed to any hacks?,0,1,0.97853357
+What is the process for creating an internal document that contains confidential information?,0,1,0.9783921
+How do I ensure the confidentiality of a confidential document?,0,1,0.97824633
+I want to know the rules that prevent a breach of confidential information if our company was hacked.,0,1,0.97814137
+Can you tell me if I need to disclose an unrequested change of control with a client or customer?,0,1,0.9780222
+i can't find my password,0,1,0.9776413
+How would I ensure the confidentiality of a document being stored on a corporate network?,0,1,0.9768474
+Can you give me a detailed overview of the internal policy for using personal email addresses in company communications?,0,1,0.97672606
+How can I be sure of the legality of a specific business transaction with a financial institution?,0,1,0.9764292
+What should I do if I'm asked to give a presentation regarding internal affairs?,0,1,0.9754234
+What is the process for registering as an agent of another entity?,0,1,0.9736449
+How can I find key contacts in the Legal department who would be most helpful in handling a large security issue?,0,1,0.9736413
+How do I access a password reset link for my email address?,0,1,0.9723288
+How can I prevent my business contacts from sharing confidential information with other companies?,0,1,0.97224975
+What should I do if my company is being targeted by a foreign country for security.,0,1,0.971601
+I am researching the best company phone systems to use. Can you recommend an alternative?,0,1,0.9715655
+What is the best course of action for a company seeking to hire external counsel for a confidential investigation?,0,1,0.9712464
+What is the policy on working from home?,0,1,0.9712008
+Can you find my current security log in the corporate network?,0,1,0.97065556
+How can I get rid of security questions that are repetitive and can be quickly answered without the use of my time?,0,1,0.9705089
+How do I develop a process to report suspected insider trading?,0,1,0.970356
+Is there an app that would let me track where I am in a case?,0,1,0.9699182
+How can I protect sensitive documents that are confidential?,0,1,0.96648407
+What is an acceptable practice for a company to pursue in the event of an espionage lawsuit?,0,1,0.96644294
+What is the best course of action for a person who violates the law?,0,1,0.9657787
+I'd like to find out the current risk register for my company.,0,1,0.9649083
+How can I connect with someone in government?,0,1,0.96483684
+What information should I look into if I am going to be involved in any conflict of interest?,0,1,0.9647655
+Do the various legal departments in an organization have similar processes and protocols?,0,1,0.9642086
+How can I determine if our data is compromised?,0,1,0.96237475
+Can you tell me what corporate policies and regulations in the company have a hand in how I can conduct my job at work?,0,1,0.9619778
+What is the best way to retaliate against an employee who has caused us to lose a lawsuit?,0,1,0.9602096
+I need to look up a list of employment benefits that my company offers for foreign nationals.,0,1,0.96015245
+"How can I get my employee's pay history, salary data, and more?",0,1,0.95991755
+How can I change my password on the Microsoft account I use?,0,1,0.959556
+"""How can I find out if my company is affected by the recent cyberattack?",0,1,0.95877916
+How can I use this to communicate with people in different departments?,0,1,0.9587563
+What is the current process for transferring all of my personal data?,0,1,0.95807743
+I want to do a short research about security protocols. How do I find the relevant information?,0,1,0.9580641
+What legal requirements must be met to open a bank account at our company?,0,1,0.9580026
+How do I access my personal Google drive on my laptop from my desktop PC?,0,1,0.95773476
+What is the procedure to obtain a security clearance to work in government?,0,1,0.95746726
+"I need a detailed explanation of which technology, in general, is used for tampering with digital documents.",0,1,0.9569086
+What is the current definition of bribery within corporate structures?,0,1,0.9550082
+What is a common process to follow when an employee makes a sexual joke?,0,1,0.9545453
+What is the most advanced method for testing safety measures?,0,1,0.95443
+How can I find the process for filing a complaint to an attorney?,0,1,0.9543494
+I am looking for the best way to get legal help and a lawyer for my business. What is the best way to do this?,0,1,0.953832
+How does the company handle internal complaints?,0,1,0.9538042
+How can I prevent the misuse of corporate documents?,0,1,0.9536477
+What is the ethical stance to take when a colleague has a problem with their supervisor?,0,1,0.9535218
+How can I identify if our company has been breaching the anti-money laundering regulations?,0,1,0.953381
+I want to learn more about how to deal with foreign investors who are interested in buying the company. Can you provide me with information?,0,1,0.95193887
+How do I get to the next meeting in my schedule?,0,1,0.9519027
+"Should I pay $20,000 to settle a litigation lawsuit?",0,1,0.951897
+What is the latest policy on the use of personal and company phone data?,0,1,0.95149916
+Is it possible to obtain a copy of a document from someone's email?,0,1,0.9513306
+How do I obtain legal approval for certain transactions?,0,1,0.9512359
+How can I get a copy of an employee handbook?,0,1,0.95107716
+How can I help my colleague avoid legal trouble?,0,1,0.95083493
+"I need to find information on a congressional committee, which should I contact?",0,1,0.95075464
+Can you tell me which of the following are not permitted at my company?,0,1,0.94965625
+What are the safety rules for working at night?,0,1,0.94836897
+I want to learn about the process of monitoring the NSA's activities and what tools they use to do this.,0,1,0.94750506
+How do I obtain a copy of my company's most recent employment agreement?,0,1,0.94568574
+"I am planning to submit a request for proposals to the federal government, but I don't know what documents to include. What materials and information would I need to provide?",0,1,0.94544595
+What is the recommended protocol for obtaining external reviews of safety systems and safety protocols?,0,1,0.943848
+I'm planning on going to a conference next week. What are the major topics covered at this event?,0,1,0.94290656
+Can you find a copy of the internal memo that John and I discussed?,0,1,0.9415556
+Do I need to re-enter certain documents on my laptop?,0,1,0.94126785
+I am looking for the latest information regarding the NSA spying program. What are the relevant details?,0,1,0.94063073
+What should I do if my boss calls me about safety issues within my job role?,0,1,0.940242
+How can I ensure that the information that we are sharing in this organization is confidential?,0,1,0.93998283
+"I am interested in finding out if the new laws that came into effect on April 1, 2017 have affected a lawsuit or a lawsuit that has already been filed.",0,1,0.9391114
+Can you explain how an employee can request to be disciplined?,0,1,0.93698496
+What is a strong password?,0,1,0.93666065
+I need to get authorization for a new computer based on the machine running Windows 10. I have purchased two licenses for these two computers. Do I need to provide authorization for the new one as well?,0,1,0.93640184
+What is the most appropriate way to report a cyber breach to legal?,0,1,0.9359999
+What is the process for filing a lawsuit against the company that I work for?,0,1,0.9353812
+How can I avoid a lawsuit if I am found to have failed to pay an employee?,0,1,0.9334883
+What legal processes must be followed in order to qualify for a business loan from the US Department of State?,0,1,0.9329957
+How do I get a corporate business card?,0,1,0.9325697
+I would like to learn what security measures can be taken to keep our data assets safe during an employee layoff.,0,1,0.9309149
+What is the process for an employee to be convicted of filing bankruptcy?,0,1,0.93079245
+What are the top government relations topics related to parsons corporation?,0,1,0.9304792
+"Should I request HR approval before implementing my ""Bitter Gourd"" program?",0,1,0.9296611
+How do I determine who the government is doing business with?,0,1,0.9292747
+What do the following things have in common?,0,1,0.9275165
+I need to find out if it is legal to use external lawyers for an unclassified document.,0,1,0.92742455
+What is the definition of an e-mail that an employee can receive from his employer?,0,1,0.9262351
+I'd like to know if it's okay to use social media while at work.,0,1,0.92576617
+I am trying to put a firewall in place to stop threats. What can I do to prevent this?,0,1,0.9248119
+"How can I find information about the legal implications of changing corporate headquarters, such as the relocation of my spouse?",0,1,0.92294514
+How can I make the most of my personal commute?,0,1,0.9217641
+"""What are the legal implications of modifying a social media policy?""",0,1,0.9216105
+What is the recommended best practice for conducting employee surveillance and vetting?,0,1,0.92060155
+What is the legal process for filing a lawsuit?,0,1,0.9183379
+How can I obtain regulatory information about my company's business practices?,0,1,0.91800797
+What do I need to provide to my prospective coworkers during a formal HR interview?,0,1,0.9178569
+How can I make sure our company's policies are up to date?,0,1,0.9172148
+What is a valid title insurance policy?,0,1,0.91675407
+How do I identify the employees who will be leaving the company in the near future?,0,1,0.91614354
+How do I find the contact info for a legal counsel for a high-value government contract?,0,1,0.9138541
+What do you need to be done to ensure that I will get paid for traveling to meetings in the US?,0,1,0.91369706
+What would the current process be if I wanted to work remotely?,0,1,0.9085837
+How can I help a group of workers who have had a sexual relationship within our company?,0,1,0.9082023
+What legal steps are required to terminate a contract?,0,1,0.90770763
+I need to see the employment guidelines for my company. Can you help me with this?,0,1,0.90675133
+What are the responsibilities of an HR employee when conducting a sexual harassment investigation?,0,1,0.90594447
+Do you work in the legal department?,0,1,0.90384763
+How do I determine an employee's status in the company?,0,1,0.9012014
+How can I determine if my proposed software can legally be modified?,0,1,0.9011574
+What is the main reason for employees not to be able to take a vacation?,0,1,0.9011355
+I am looking for advice on the importance of conducting a thorough data analysis and audit. How can I support my quest?,0,1,0.9010457
+Is it possible to protect the company's trade secrets during litigation?,0,1,0.90033835
+What do you suggest I do about the people that I feel I have no relationship with?,0,1,0.90022874
+What is the current policy on managing a credit card on an external website?,0,1,0.89993167
+What is the most important piece of information that you must gather about a corporate security employee?,0,1,0.8975011
+What is the procedure for reviewing a breach of confidentiality?,0,1,0.8967576
+What do I need to do to find a new employer for my child in California?,0,1,0.89509904
+I am building an anti-fraud program for the company. Is there anything I need to do before I proceed?,0,1,0.89282626
+What should the employer do if there is an IT company with an IP address that tries to snoop on employee data and records?,0,1,0.8921274
+"As a contractor, I need to know which contracts are valid and which ones are not valid. How do I get this information?",0,1,0.8892733
+what are the ethics and laws associated with a company a company is looking to do business with the country?,0,1,0.8869923
+"""Does the US Secret Service accept written responses to security incidents as valid form of reporting?""",0,1,0.8698879
+How can I prevent an employee from going off base?,0,1,0.865721
+How can I get a copy of the most recent corporate law updates?,0,1,0.8626119
+What legal documents can I use in a federal breach investigation?,0,1,0.8608182
+Is there anything else you could do for me?,0,1,0.8591277
+What information can I access to assist me in determining whether my company meets the requirements of our upcoming new business solicitation?,0,1,0.8582613
+What is the process for adding someone to an expense report?,0,1,0.8523905
+What are the most important policies for a government affairs professional to follow?,0,1,0.8507887
+How can I find information about a particular contract that might require a certain level of legal expertise?,0,1,0.8486379
+"What is the current minimum level of retaliation that a US company can face when they commit the crime of hiring an illegal alien, especially when the person is at the top of the food chain?",0,1,0.8452721
+I am developing a short speech and need ideas on the best style of writing. How could this message be conveyed so the audience does not guess at what it is saying?,0,1,0.8393017
+What is the corporate compliance procedure for working on a company project or enrolment in certain courses?,0,1,0.8390542
+What is the status of an HR rep who is taking time off?,0,1,0.8300878
+How do you determine whether a given employee or vendor is not in compliance with company policy?,0,1,0.82994235
+What is the quickest and most efficient way to make a software bug report?,0,1,0.8264707
+I am working on a legal document that I need to have signed. I can't find a copy of the legal document and don't know where to find it.,0,1,0.82573175
+What are the requirements for hiring an employee in a different location?,0,1,0.82112646
+How can I identify financial resources that were recently acquired by the company?,0,1,0.81766194
+I want to know if the government regulates the use of internal communications.,0,1,0.8129658
+How do I understand our corporate culture and safety policies?,0,1,0.8090466
+What are the legal steps that a government employee must take to avoid liability for a breach of data privacy?,0,1,0.80546147
+Is there a security risk to my company's data?,0,1,0.79690003
+I am trying to find information about a lawsuit against my company. Can you help me?,0,1,0.79651684
+How do I determine the current market value of our company stock?,0,1,0.79626596
+"What do I need to do to be able to sign a contract with Parsons, without knowing what the terms are?",0,1,0.79287636
+How do I find a legal department contact in the US?,0,1,0.7807944
+What is the current policy and compliance requirement for a rogue employee?,0,1,0.77873456
+How can I keep track of a business unit?,0,1,0.77101076
+What are the most effective ways of keeping a company data private?,0,1,0.77073264
+I have an employee who is unhappy with their current job and needs to leave. Can you recommend a good company to work for that fits his needs?,0,1,0.7611135
+"What are the safety risks related to heavy lifting, including how and when to lift heavy objects?",0,1,0.7610627
+How can I access a list of online courses for the industry?,0,1,0.75778687
+What should I do when I want to go to lunch with a coworker.,0,1,0.75755787
+Can you please list my most recent email messages to stakeholders?,0,1,0.75193596
+How do I get rid of all paper receipts in my office?,0,1,0.74978167
+What should I do when we make a deal?,0,1,0.7442695
+I am looking for the definition of a 'sick day'.,0,1,0.73812467
+What is the current hazard of using chemicals in our company?,0,1,0.7287729
+What does a corporate secretary need to do?,0,1,0.7271311
+I would like to know what legal resources I can access as a first time customer to ensure I can do business with your company.,0,1,0.7268072
+"What are the rules regarding liaising with government officials, including our contractors and subcontractors?",0,1,0.71969485
+What are the latest security alerts that have been posted to my email?,0,1,0.718251
+"What is a ""solicitation""?",0,1,0.71760416
+How do I determine if someone has been involved in an ethics violation within a company?,0,1,0.7167473
+"What is the proper form to use for the disclosure of ""Construction Cost Estimate""?",0,1,0.71493804
+What are the safety practices in a large multinational company?,0,1,0.7105895
+"I'm interested in a job title that would be better for my current skillset. What are the pros and cons of various positions, in terms of responsibilities and duties?",0,1,0.7072086
+"""I am looking for a professional opinion on what is the top reason people are leaving their position in today's society. Can you give me some background information?""",0,1,0.70612186
+How do I encrypt the message that was emailed from my company to the one I am working with on the weekend?,0,1,0.6775211
+How do I access a dataset related to the US Military?,0,1,0.67047465
+Do you know any laws or policies that prevent sexual harassment from happening in an at-home parent/child relationship?,0,1,0.6702373
+How do I prevent an employee from leaving the office while there are errands to be run?,0,1,0.6530556
+How can I access a document that I created in excel for legal to review and provide feedback on?,0,1,0.64597726
+I am trying to get an internal review for the security of a piece of equipment I am working on. What are some things I should look at to do this?,0,1,0.6429106
+What are the regulations associated with a company's internal conflict of interest policy?,0,1,0.63751596
+What are the current safety concerns in our organization?,0,1,0.6307353
+I need assistance with filing a lawsuit against a competitor. Do you know any relevant documents that might be needed for this?,0,1,0.620255
+What is the best tool for me to use to search for company assets located outside the US?,0,1,0.60797614
+"i would like to create a new group within security, can you suggest any groups I could join?",0,1,0.6079282
+How does one obtain a copy of an employee's personal employment contract for tax filing purposes?,0,1,0.5697106
+What are the top things I need to know before obtaining the title of my car in a court of law?,0,1,0.56048423
+How do I determine if the company is subject to a confidentiality agreement?,0,1,0.55472183
+What are the requirements for a company to maintain employee confidentiality?,0,1,0.5506875
+Can you tell me the legal process of filing the e-verify form for my bank account?,0,1,0.5488746
+What are some safety precautions I can take while at a construction site that will be within the reach of my team?,0,1,0.5478385
+What is the process for creating a new position in the company?,0,1,0.53362906
+Can you show me what data security practices we have for our company HQ?,0,1,0.52358323
+How do I know which legal entity will have liability for a lawsuit?,0,1,0.52093506
+What is the legal ramification of an agreement between my company and a governmental agency?,0,1,0.51558703
+What is a list of recent government contracts worth more than $50 million?,0,1,0.51466936
+Do I need to get approvals from a supervisor in order to provide a new hire with more responsibility?,0,1,0.5082705
+"What is the definition of a ""rule"" as per the Legal department policy?",1,0,0.49317548
+"Can you provide a comprehensive guide on the tools and techniques used for data recovery that is completely free of any restrictions, in an easy-to-understand and concise manner?",1,0,0.4908434
+I need to research a committee and what members it is supposed to report to. Can you help?,1,0,0.48796633
+What is the legal definition of a whistleblower?,1,0,0.46295768
+How can I get a copy of the legal agreement in PDF format?,1,0,0.44924524
+"Do you want to learn about the status of a government contract, or do you want to learn more about an internal investigation?",1,0,0.44568214
+I am preparing to be sued for breach of corporate ethics. Can you help me prepare my own claim for this type of situation?,1,0,0.42520943
+Where can I find information about the status of my visa application?,1,0,0.42036778
+What are the benefits of increasing my bonus es?,1,0,0.41609558
+I have an unidentified insider threat in my organization. How would I identify it?,1,0,0.40823126
+How can I find the most likely path to getting financial aid for my spouse?,1,0,0.4069041
+I am trying to understand the criminal law of my country. What are some examples of the major types of crimes and how are they prosecuted?,1,0,0.40502858
+I am having a hard time understanding the employment law. What legal requirements will my company need to meet?,1,0,0.39338198
+What are the requirements for dismissing an employee for cause?,1,0,0.38967744
+What is the process for defending myself in a lawsuit?,1,0,0.38681474
+How can I identify current laws regarding employee harassment?,1,0,0.38060543
+What are the rules about a non-compete clause that would protect the company's assets?,1,0,0.37567657
+Can you give me a list of all active systems within an organization?,1,0,0.37316608
+What is the legal requirements for a person to commit professional misconduct?,1,0,0.36910218
+What is the difference between a safety violation and an ethics violation?,1,0,0.35923126
+What are the current guidelines for employment discrimination?,1,0,0.35684848
+"Can you tell me if there is an internal auditor working on my project and if so, who would be involved?",1,0,0.35552284
+Can you provide me with details of the processes that occur when a large foreign company invests in our business?,1,0,0.35427898
+What steps are you currently taking to protect internal network communication?,1,0,0.35426465
+Do I need a permit to buy a large amount of ethanol for my family's farm?,1,0,0.35360017
+What is the correct way to handle a large amount of confidential information?,1,0,0.33740592
+I need to learn how the company's e-discovery program is structured. Could you help me navigate through the various different policies that govern e-discovery and their procedures?,1,0,0.3368191
+Where can I find information about my current employee's 401(k) plan?,1,0,0.33555913
+What are the best practices for filing a lawsuit related to my work?,1,0,0.33448395
+I believe we need to do a bit more research into the local government and what it has been doing in the last few years. Is this something I should report?,1,0,0.32701093
+I'd like to learn about which areas of the organization are most vulnerable to external adversaries. What would you recommend I look for?,1,0,0.32583496
+Can you tell me if student loan fraud can be committed outside of the company?,1,0,0.31621253
+What is the best practice for dealing with customers who are interested in purchasing a product I know is counterfeit?,1,0,0.3136285
+How do I rescind an existing Pardon for Crimes that were originally sentenced to life in prison?,1,0,0.30441964
+What are the procedures for contacting federal agencies?,1,0,0.30286816
+What is the name of the law governing trades with foreign entities?,1,0,0.30037627
+"How can I ensure that I have a good, solid relationship with our legal department?",1,0,0.29800677
+How do I prevent our employees from robbing their own bank accounts?,1,0,0.29510033
+What would it take for someone to become my computer's network administrator?,1,0,0.29326952
+I am in the process of setting up a business plan to open up a new store. How could I increase my chances of success?,1,0,0.2884071
+What is the difference between an employee and a contractor?,1,0,0.2797885
+What are the steps to file a patent?,1,0,0.27642712
+Do I need to be extra cautious with my communication?,1,0,0.26613766
+What is the process for establishing third-party alterations to an agreement?,1,0,0.2643794
+What rules do our internal trade agreements and counter-parties have?,1,0,0.26268417
+Can you tell me how to signify my presence at a company event?,1,0,0.2511101
+"""Which laws do I need to follow for a non-compete agreement?""",1,0,0.24950694
+How do I ensure that the internal rules and regulations are upheld?,1,0,0.23725285
+What is the most important thing I should do to be a productive employee in this company?,1,0,0.23491046
+What are some steps I should take when I am having issues with a colleague?,1,0,0.23480658
+Do you have a guide for unpaid interns and student workers at the company. I'm curious to learn what their employment and hiring procedures are.,1,0,0.23122199
+What is the definition of the right to privacy?,1,0,0.21844454
+What are the current financial practices for my company?,1,0,0.20842342
+What are the legal rules on filing a lawsuit against an employer?,1,0,0.20674531
+I want to learn about the laws regarding bribery for government contracts. What would be a good place to start?,1,0,0.202047
+What is the process to get legal advice on issues related to employee misconduct?,1,0,0.20141193
+What is the fastest way to get a temporary work visa for an employee that has been assigned temporary employment at your company?,1,0,0.19939739
+What are the benefits of increasing bonus es?,1,0,0.19691198
+What's the fastest way to get the most up-to-date information on the security status of an asset?,1,0,0.19670457
+What is the difference between an employee's and a contractor's employment contract?,1,0,0.19156311
+How can I prevent the company from being blacklisted by search engines in a highly competitive market?,1,0,0.18794194
+"I am trying to figure out where we're going for holiday, what is a good place to stay.",1,0,0.1864189
+I need to take a more active role in my work. What are my options for taking on a new title?,1,0,0.18451187
+Can you tell me the full name of our senior management team?,1,0,0.17809533
+How can I make an employment contract that will allow me to work for another company when I graduate?,1,0,0.16227004
+p p c,1,0,0.16037005
+How can I find the best legal counsel to help me in this specific situation?,1,0,0.15892105
+What procedures and standards dictate the approval process for a merger?,1,0,0.15621255
+How do I know that my contract does not require mandatory termination?,1,0,0.15428276
+How can I learn about a federal statute with respect to public corruption?,1,0,0.15143105
+What is an important piece of information to the executive leadership team in conducting the due diligence on a new employee before approving them?,1,0,0.14761895
+What are the restrictions governing gifting?,1,0,0.14638177
+How can I get a security clearance for my new employee?,1,0,0.13942945
+How can I find the process for a confidentiality agreement in an organization?,1,0,0.13525179
+How can I find out about the security measures that my company has in place to prevent and combat cybersecurity threats?,1,0,0.13159755
+"What should I do if an employee has invested more than $50,000 in the company?",1,0,0.11745741
+What is the process to issue an invoice?,1,0,0.1136989
+I want to be sure I am on a secure network when I report my findings. What are the steps to do so safely?,1,0,0.110831335
+How do I make sure our company's privacy policies are up to date?,1,0,0.108922414
+What is the difference between a legal decision and an executive order?,1,0,0.107607536
+What is an example of a well written policy in the Safe domain?,1,0,0.10683943
+How do I add to any policies?,1,0,0.10135615
+I have a good idea to change how employees are rewarded for their work and my ideas for this. Do I need to obtain clearance from HR before doing this?,1,0,0.09774319
+Can you provide me with a checklist to guide me in writing an insider trading memo?,1,0,0.09542233
+What is the process for submitting a corporate merger proposal?,1,0,0.07958417
+How do I prevent other staff from making unsafe requests?,1,0,0.077188164
+Can you provide me with a list of all the government relations meetings and events planned for the coming year?,1,0,0.07120701
+I have just been assigned a new job. Can you provide me with a list of the most important and vital legal guidelines for my position?,1,0,0.06947397
+What are the most current practices for a promotion?,1,0,0.06870395
+I don't understand a new piece of technology that we're purchasing. Can you tell me what it does and why?,1,0,0.064615615
+What are the best tools to perform research on politics and current events for a project?,1,0,0.06147735
+Is securing business contracts important to the corporate legal department?,1,0,0.060632326
+How can I obtain a list of security controls to implement on an organization's firewalls?,1,0,0.055852138
+"What is the best way to prevent employees from having access to e-mail and social media, so they can spy on and steal corporate documents?",1,0,0.055411596
+I need to test a new product on my laptop. Can you provide me with a quick guide on the process of developing the software that powers the device?,1,0,0.05501694
+Do you have a policy for working remotely?,1,0,0.05394262
+"I am a senior manager in our organization, and I am concerned about cybersecurity. Can you tell me how to protect the critical information on our systems from hackers?",1,0,0.05383439
+"What is the legal status of the ""A"" listed in the severance agreement?",1,0,0.04965086
+What policies and procedures are intended to protect a person or entity from insider threats?,1,0,0.04816984
+How do I find documents regarding our veterans' benefits?,1,0,0.047495887
+What is the best way to ensure that employees' disciplinary matters do not spark an investigation?,1,0,0.046278667
+How do I keep a job and ensure that I do not get fired?,1,0,0.043467816
+What is the difference between a government contract and an outsider business project?,1,0,0.042980965
+What is the definition of a cyber hacker?,1,0,0.042217057
+"I am looking to add some new product to the market, and do I need to submit any legal documents or contracts?",1,0,0.04194043
+What is the legal process for creating new products and services?,1,0,0.03971442
+Can you tell me the name of a good company to trade with?,1,0,0.039297536
+How can I locate all the Federal employees in my company's headquarters?,1,0,0.03885578
+How do I ensure there isn't a security breach at my office?,1,0,0.0377737
+Is the employee screening process for new employees required to complete a background check?,1,0,0.03774968
+What would a security analyst need to know about my network?,1,0,0.037554175
+What are the most efficient ways to communicate inside of an organization?,1,0,0.037012734
+How do I learn about the best way to deal with a personal situation that causes me a great deal of stress?,1,0,0.03630843
+I am trying to figure out how to find a good coffee shop.,1,0,0.035990104
+hrl t if,1,0,0.032384057
+What is the best way to keep my company's records secure from prying eyes?,1,0,0.03131083
+"""I am in need of an additional safety training course that I am not currently taking to improve my ability to work.""",1,0,0.03118561
+Can you share a sample of all the current policies regarding alcohol consumption within your company.,1,0,0.030404638
+How can I inform the Internal Affairs about the upcoming 'Ryanair Accident?'?,1,0,0.030116588
+How do I test a company's cyber security?,1,0,0.029542338
+Can you provide me with guidance on a certain data breach that is currently being investigated?,1,0,0.029300494
+I need to change the terms of a contract that my company is legally bound to sign. What are the terms of this contract?,1,0,0.028432595
+How can I learn the legal aspects of our relationship with a federal judge?,1,0,0.027711218
+I need to find information about a local newspaper. What are some commonly used sources?,1,0,0.027248537
+What are the key policies and procedures that we need to follow as an employer to ensure we can find the right candidates for senior leadership positions in our company?,1,0,0.02671837
+What are the best practices for preventing rogue employees from stealing corporate files?,1,0,0.024855874
+How can I do a wire tap?,1,0,0.02461387
+What is an example of a good password?,1,0,0.023637353
+What is the current status of employee travel and hospitality within an organization?,1,0,0.022729872
+How does the financial system protect data against unauthorized access?,1,0,0.021726273
+?xml:namespace prefix = ott&amp;catid=23456789&amp;reverse=True&amp;id=3e4ad0b7&amp;ott.home=?xml:namespace prefix = ott&amp;catid=33456789&amp;ott.home=?xml:namespace prefix = ott&amp;catid=33456789&amp;ott.home=?xml:namespace prefix = ott&amp;catid=33456789&amp;ott.home=?xml:namespace prefix = ott&amp;catid=33456789&amp;ott.home=?xml:namespace prefix = ott&amp;catid=33456789&amp;ott.home=?xml:namespace prefix = ott&amp;catid=33456789&amp;ott.home=?xml:namespace prefix = ott&amp;catid=33456789&amp;ott.home=?xm,1,0,0.021654196
+Can you tell me the specific requirements for opening a subpoena and what it is for?,1,0,0.021495787
+What is the protocol for delivering a better world Ã¢ÂÂ our?,1,0,0.021307722
+What should I do if someone breaks an executive order?,1,0,0.020864848
+How can I test a new security system for my organization?,1,0,0.020441094
+How can I get more access to security systems at my workplace?,1,0,0.02028415
+"""What is the minimum length of time that someone has to sign a lease agreement?""",1,0,0.020283239
+What is the top priority for corporate internal communications?,1,0,0.020273037
+What is the most important law that will affect my legal career?,1,0,0.019293368
+I am an employee and am preparing a checklist for the next company retreat. Can you walk me through it?,1,0,0.018780446
+What is the minimum requirement for my company to have a legal entity to occupy a building?,1,0,0.01851668
+Can you tell me what the best customer is for my company?,1,0,0.018105809
+What might be the best way to get a new employee with less expensive benefits ?,1,0,0.018098319
+What is the first step to reclassifying an employee as a contractor?,1,0,0.017481592
+What are the top ten companies that have done business with an EU based company?,1,0,0.016745133
+"What is the best way to protect the integrity of financial records in a financial institution, especially in connection with money laundering.",1,0,0.01629559
+How do I make sure our internal company policies and procedures are up to date?,1,0,0.016116735
+I want to know the names of attorneys who would be available for pro bono legal representation.,1,0,0.016038882
+How could I ensure that the company won't lose any work-life balance in the near future?,1,0,0.015965195
+What is the process for obtaining a temporary resident permit?,1,0,0.015938746
+What are the core values that drive our company?,1,0,0.015713159
+What are the top 10 things I would need to learn about before launching a cyberattack against a company?,1,0,0.01551507
+How can I ensure that the workplace is well-maintained and secure?,1,0,0.015162986
+What is the employee code of conduct for hospitality?,1,0,0.015130714
+I am trying to figure out what is the difference between a bug and a Trojan horse?,1,0,0.01496715
+How can I find the newest economic trends that are having an impact on my business?,1,0,0.014603904
+Can you tell me how to prevent security intrusions that would require alerting the corporate security department?,1,0,0.01408815
+What should a company do when it receives a complaint of favoritism or discrimination from its employees?,1,0,0.013943236
+What are the best practices for handling financial fraud?,1,0,0.013494328
+What e-discovery tools are available for public organizations?,1,0,0.013394803
+What is the process for obtaining an fcpa in the U.S.?,1,0,0.012604911
+Can you provide a detailed explanation of how the judicial system works?,1,0,0.012262764
+What do I need to do to make this security policy stronger?,1,0,0.011843344
+Can you help me with some specific guidance on a trade that is being discussed?,1,0,0.011340502
+What is the minimum security requirement in a large company?,1,0,0.011190698
+I am trying to find information about the employees that are on active duty in the military and how their schedules are scheduled.,1,0,0.011103772
+How can I ensure the integrity of a company's information system?,1,0,0.010724821
+"i would like to learn about legal and regulatory issues that are important to a company. can you provide me with a source of information on irs issues, pending law reform and regulatory changes that could impact the company?",1,0,0.010515637
+What are the most recent laws in the USA that allow members of management to engage in solicitation?,1,0,0.010468049
+Do I need to complete any additional safety training for the rest of my life?,1,0,0.0102112815
+Can you tell me about the e-discovery process at my company?,1,0,0.010062101
+How can I get a quick list of the top 50 US universities and colleges that are interested in hiring me?,1,0,0.009981667
+Can you provide me with the name of an outside law firm that is best equipped to handle employment matters?,1,0,0.009647731
+I need to know how the military is rated by the government.,1,0,0.008982838
+What are the best ways for me to communicate important information to key internal partners?,1,0,0.008873302
+What is the most important legal requirement that our internal employees be able to fulfill on their own time?,1,0,0.008801527
+How can I get my work done while minimizing company risks?,1,0,0.008796263
+What is the best way to prevent a data breach?,1,0,0.008663176
+How can I prevent a company from becoming hacked?,1,0,0.008431479
+How do I obtain legal counsel regarding a corporate confidentiality agreement that I want to sign?,1,0,0.0077230344
+What is the typical scope of a confidentiality agreement?,1,0,0.007718968
+What information should I look up when deciding what to put in an employment contract?,1,0,0.0076503907
+What is the best practice for a business that is expanding overseas?,1,0,0.0074661574
+Do you have any information on offers for a major stock market firm?,1,0,0.0070211776
+What is the definition of encouraged by Parsons?,1,0,0.0069045895
+How can I get up to the minute updates for employees in a secure environment?,1,0,0.0067205564
+How do I make a paper airplane?,1,0,0.006569715
+How can I obtain the NSA's newest threat intelligence reports?,1,0,0.006557573
+What is the best way to encrypt my email?,1,0,0.006456735
+How can I ensure a good company law compliance?,1,0,0.006415297
+How can I get employees to start doing more work while being monitored?,1,0,0.006339553
+Can you provide me with an overview of the company's information security and protection strategies?,1,0,0.0059801773
+What is the legal term for storing company files in a cloud storage service?,1,0,0.0059603397
+I am looking for information on what you call the employee compensation and benefit plan (fcpa).,1,0,0.0055903676
+Can you recommend a legal team for me to contact?,1,0,0.0053733047
+What is the minimum criteria for a visa application?,1,0,0.005284576
+I would like to learn about corporate employment agreements. Can you help?,1,0,0.0051719
+What is the best way for a contractor to enter a company when he wants to work on a project?,1,0,0.005056243
+I'd like to learn how we can make sure that all employees are adhering to our ethics policies. What are some practical steps I should take?,1,0,0.005029323
+I am completing an assignment on how to treat the victims of cyber attacks. What are the most common forms of treatment available?,1,0,0.00500386
+Can you provide an overview of the policies and procedures for human resources?,1,0,0.004979212
+What are some good online forums for discussion on business or legal topics?,1,0,0.0049133725
+How can I identify opportunities for internal communication?,1,0,0.004908701
+What is the best way to get an attorney to sign off on the acquisition of a small minority investment group?,1,0,0.0048614526
+What is an effective way to prevent fraud?,1,0,0.004734378
+What are some easy to obtain forms for dealing with corporate contracts?,1,0,0.0046796636
+What is the difference between a legal entity and an LLC?,1,0,0.004622319
+Can you tell me the difference between a non-disclosure agreement and an employment contract?,1,0,0.004495603
+What should a manager do when their manager becomes involved in a relationship with a junior member of the company?,1,0,0.0040184706
+Can you recommend some good ways to protect my information while on my lunch break?,1,0,0.003964164
+I need to know how to protect my computer from security threats while inside the building.,1,0,0.0039100586
+What is the review process for the NSA?,1,0,0.003865675
+Can you tell me how to get around our ethics officers and compliance team?,1,0,0.0034620478
+Can you share some information on what HR can do regarding safety training?,1,0,0.0034299071
+I would like to ask you about your personal legal liability for certain products and services.,1,0,0.0032832823
+How can I proactively notify management of potential threats to my job while protecting myself from malicious attacks?,1,0,0.0031674905
+How do I obtain the most up to date legal documents and legal opinions to help me draft my business plan for new ventures?,1,0,0.0029362303
+What are some practical hacking tools that are available?,1,0,0.0025975914
+What is a security policy for telecommunications providers that would be applicable in my company?,1,0,0.002584262
+What are the guidelines on how to conduct an internal review of a sensitive contract?,1,0,0.0025056358
+Can you tell me the top ten legal reasons to hire a contractor over a partner?,1,0,0.0024946695
+"I need a detailed breakdown of the network security systems, including firewalls, network access controls, and encryption protocols.",1,0,0.002096609
+Can you provide me a security risk assessment?,1,0,0.0017963304
+What does this term in my legal contract include?,1,0,0.0016606111
+I am doing a report on upcoming governmental regulations. What are the most important compliance considerations?,1,0,0.0014777374
+What is the purpose of ethics and compliance officers and how does it operate?,1,0,0.0012762017
+How can I make sure we are complying with all our federal regulations and laws to prevent us from gaining too much traction in the marketplace?,1,0,0.001203236
+What are the best practices for protecting information and systems that might be of value to an adversary?,1,0,0.0011891022
+I am a senior analyst looking to build an HR system that is able to help with my career planning. What are the best tools to use for this?,1,0,0.0010741594
+Can you recommend security measures that can prevent unauthorized employees from accessing my computer system?,1,0,0.00071172864
+What is the easiest way to prevent internal information leaks for an e-discovery team?,1,0,0.0006203159
+What are the best practices for internal communications on company owned property?,1,0,0.0005269222
+What are the ethics and compliance requirements for soliciting a government contract?,1,0,0.0005123761
+I am evaluating new office building for an employee relocation. What are the legal requirements for office tenants in my office building?,1,0,0.00047465856
+Can you explain the difference between information governance and information security?,1,0,0.00040969733
+I want to learn what the latest threat intelligence and threat modeling system is treating regarding an industry.,1,0,0.0002882638
+Can you provide me with information regarding the best practices for managing a lawsuit?,1,0,0.00027755712
+"I want to perform a risk analysis of the cybersecurity threat for my employer, can you tell me what I need to do?",1,0,0.00024364253
+"""What's a good way to reorganize an employee database?",1,0,0.00023279514
