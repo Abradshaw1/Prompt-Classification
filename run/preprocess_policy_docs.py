@@ -24,7 +24,7 @@ def process_and_clean_pdfs(input_folder, output_folder):
                     r'Scope.*',  # Remove scope sections
                     r'References.*',  # Remove References sections
                     r'Company may revise.*',  # Remove disclaimers
-                    r'\b(confidential|sensitive|public|general business)\b',  # Classification labels
+                    r'\b(public|general business)\b',  # Classification labels
                     r'[\*\!\?\(\)\[\]\{\},\.;:_/\\\&\@\#\%\|<>]',  # Remove punctuation & special characters
                     r'[-]',  # Remove hyphens
                     r'[\d]',  # Remove numbers
