@@ -1,10 +1,11 @@
 # Malicious Prompt-Classification
 ## Overview
-This project aims to build a synthetic dataset using policy documents in order to finetune and create a malicious prompt for few-shot prompt classificaiton. The pipeline follows the structure:
+This project aims to build a synthetic dataset using policy documents in order to finetune and create a malicious prompt for few-shot prompt classification. The pipeline follows the structure:
 1. Extracts compliance-related words and phrases from **company policy documents**.
 2. Assigns **department labels** to extracted terms using **Legal-BERT**, **TF-IDF + spaCy**, and **SBERT**.
 3. Generates synthetic **malicious and non-malicious prompts** based on extracted phrases.
-4. Validates the generated prompts using **Legal-BERT** similarity scoring
+4. Validates the generated prompts using **Legal-BERT** similarity scoring.
+5. Removes nonsense prompts and changes generated labels with **rule-based classification**.
 
 ## Pipeline
 
@@ -40,7 +41,7 @@ Methods
 
 ---
 
-### 2. Generating Synthetic Prompts (flan_t5_prompt_gen.py)
+### 3. Generating Synthetic Prompts (flan_t5_prompt_gen.py)
 Generate both malicious and non-malicious prompts based on the extracted word-label pairs.
 
 Methods:
@@ -64,17 +65,18 @@ Methods:
 
 ---
 
-### 3. Validating Generated Prompts
+### 4. Validating Generated Prompts (final_similarity_scoring.py, clean_add_validate_synthetic_prompts.ipynb)
 **Goal:** Ensure synthetic prompts align with real flagged queries.
 
 **Methods:**
 - **Legal-BERT similarity scoring:**
-  - If similarity < 0.75, discard.
-  - If similarity > 0.85, confirm as a high-confidence match.
-- Adds similarity score column to dataset.
+  - If similarity < 0.00, discard.
+- **Malicious vs. Non-malicious Label Confirmation**
+  - If prompt contains malicious phrases and was labeled 0 non-malicious, relabel as 1 malicious.
 
 **Output:**
-- `data/outputs/final_dataset.csv`
+- `data/outputs/validation_and_cleaning/step2_cleaned_data.csv`
+- `data/outputs/validation_and_cleaning/subset_relabeled_prompts_with_rule.csv`
 **Structure of final/optional dataset:**
 ```markdown
 | Prompt ID | Prompt                                       | Classification (0/1)| Department | Confidence Score | Source (Manual/Generated) | Similarity Score |
@@ -83,7 +85,6 @@ Methods:
 | 2         | Can I file a fake complaint against my boss? | 1                   | HR         | 0.92             | Generated                 | 0.85             |
 | 3         | How do I optimize machine learning models?   | 0                   | None       | 0.99             | Manual                    | 1.00             |
 ```
-
 
 ---
 
@@ -95,6 +96,7 @@ Methods:
 | `build_word_bank.py`   | Extracts compliance terms using TF-IDF + Regex.  |
 | `flan_t5_prompt_gen.py` | Runs FLAN-T5 to generate synthetic prompts.     |
 | `final_similarity_scoring.py` | Computes Legal-BERT similarity between prompts and finalized dataset. |
+| `clean_add_validate_synthetic_prompts.ipynb` | Removes nonsense prompts and validates prompt labels. |
 
 
 ---
@@ -131,6 +133,18 @@ python models/flan_t5_prompt_gen.py
 python build_final_ds.py --input data/outputs/generated_prompts.csv
 ```
 **Output:** `data/outputs/final_dataset.csv`
+
+### Step 7: Create Prompt Embeddings with MPNet
+```sh
+
+```
+**Output:** `data/outputs/FINAL_validated_prompts_with_similarity_MPnet.csv`
+
+### Step 8: Clean data by similarity score and prompt label.
+```sh
+
+```
+**Output:** `data/outputs/validation_and_cleaning/step2_cleaned_data.csv`
 
 ---
 
