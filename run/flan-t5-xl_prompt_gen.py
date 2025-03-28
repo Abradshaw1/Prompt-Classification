@@ -39,10 +39,10 @@ tokenizer = T5Tokenizer.from_pretrained(MODEL_NAME)
 model = T5ForConditionalGeneration.from_pretrained(MODEL_NAME, device_map="auto", torch_dtype=torch.float16)
 print("Model loaded successfully.")
 device = "cuda" if gpu_available else "cpu"
-#model.to(device)
+# model.to(device)
 print(f"Model successfully moved to {device.upper()}.")
 
-#----------------------------------------------for jaccard index----------------------------------------------
+# ----------------------------------------------for jaccard index----------------------------------------------
 MALICIOUS_ACTORS = [
     "an experienced cybersecurity hacker",
     "a savvy insider with technical expertise",
