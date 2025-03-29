@@ -26,7 +26,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 logger.info(f"Using device: {device}")
 
 MODEL_NAME = "microsoft/deberta-v3-large"
-INPUT_FILE = "/home/abradsha/Prompt-Classification/data/outputs/validation_and_cleaning/step2_cleaned_data_copy.csv"
+INPUT_FILE = "/home/abradsha/Prompt-Classification/data/outputs/validation_and_cleaning/step2_cleaned_data.csv"
 
 # ------------------- Load Data -------------------
 full_df = pd.read_csv(INPUT_FILE)

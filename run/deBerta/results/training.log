@@ -32,3 +32,24 @@
 2025-03-29 17:52:16,640 - INFO - Tokenization and dataset formatting complete.
 2025-03-29 17:53:04,216 - INFO - DeBERTa LoRA model initialized and ready.
 2025-03-29 17:53:04,277 - INFO - Starting training...
+2025-03-29 18:03:59,292 - INFO - Using device: cuda
+2025-03-29 18:06:30,003 - INFO - Using device: cuda
+2025-03-29 18:07:42,091 - INFO - Using device: cuda
+2025-03-29 18:07:42,168 - INFO - Loaded full dataset with 76473 rows.
+2025-03-29 18:07:42,168 - INFO - Manual (held-out test) rows: 120 | Synthetic + Manual-train rows: 76353
+2025-03-29 18:07:42,178 - INFO - Train set distribution:
+  Non-malicious (0): 29773
+  Malicious     (1): 31309
+  Total:             61082
+2025-03-29 18:07:42,179 - INFO - Validation set distribution:
+  Non-malicious (0): 7444
+  Malicious     (1): 7827
+  Total:             15271
+2025-03-29 18:07:42,179 - INFO - Test (Manual) set distribution:
+  Non-malicious (0): 36
+  Malicious     (1): 84
+  Total:             120
+2025-03-29 18:07:42,660 - INFO - Tokenizer loaded successfully.
+2025-03-29 18:07:46,117 - INFO - Tokenization and dataset formatting complete.
+2025-03-29 18:07:46,786 - INFO - DeBERTa LoRA model initialized and ready.
+2025-03-29 18:07:46,854 - INFO - Starting training...
