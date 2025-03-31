@@ -107,6 +107,7 @@ Methods:
 ```sh
 conda env create -f environment.yml
 conda activate malicious_prompt_env
+python -m spacy download en_core_web_sm (download)
 ```
 ### Step 2: Add Policy Documents
 ```sh

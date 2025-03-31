@@ -25,7 +25,7 @@ logger = logging.getLogger("DeBERTa LoRA Fine-Tuning")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 logger.info(f"Using device: {device}")
 
-MODEL_NAME = "microsoft/deberta-v3-large"
+MODEL_NAME = "protectai/deberta-v3-base-prompt-injection-v2"
 INPUT_FILE = "/home/abradsha/Prompt-Classification/data/outputs/validation_and_cleaning/step2_cleaned_data.csv"
 
 # ------------------- Load Data -------------------
@@ -33,11 +33,9 @@ full_df = pd.read_csv(INPUT_FILE)
 full_df = full_df[["Prompt", "Malicious (0/1)", "Source"]].dropna()
 full_df["Malicious (0/1)"] = full_df["Malicious (0/1)"].astype(int)
 
-# Split by source
 manual_df = full_df[full_df["Source"].str.lower() == "manual"]
 synthetic_df = full_df[full_df["Source"].str.lower() != "manual"]
 
-# Split 15% of manual into training+validation
 manual_train_val_df, manual_test_df = train_test_split(
     manual_df,
     test_size=0.85,
@@ -50,7 +48,6 @@ combined_df = pd.concat([synthetic_df, manual_train_val_df], ignore_index=True)
 logger.info(f"Loaded full dataset with {len(full_df)} rows.")
 logger.info(f"Manual (held-out test) rows: {len(manual_test_df)} | Synthetic + Manual-train rows: {len(combined_df)}")
 
-# Train/Val split on combined
 train_df, val_df = train_test_split(
     combined_df,
     test_size=0.2,
@@ -58,7 +55,6 @@ train_df, val_df = train_test_split(
     random_state=42
 )
 
-# Log distributions
 for name, subset in zip(["Train", "Validation", "Test (Manual)"], [train_df, val_df, manual_test_df]):
     counts = subset["Malicious (0/1)"].value_counts().to_dict()
     logger.info(
@@ -68,7 +64,6 @@ for name, subset in zip(["Train", "Validation", "Test (Manual)"], [train_df, val
         f"  Total:             {len(subset)}"
     )
 
-# ------------------- Tokenization -------------------
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 logger.info("Tokenizer loaded successfully.")
 
@@ -82,7 +77,6 @@ train_dataset = train_dataset.map(preprocess_function, batched=True)
 val_dataset = val_dataset.map(preprocess_function, batched=True)
 logger.info("Tokenization and dataset formatting complete.")
 
-# ------------------- Model + LoRA -------------------
 base_model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME, num_labels=2)
 
 # Add dropout to classifier head
@@ -97,7 +91,6 @@ lora_config = LoraConfig(task_type=TaskType.SEQ_CLS, r=8, lora_alpha=16, lora_dr
 model = get_peft_model(base_model, lora_config).to(device)
 logger.info("DeBERTa LoRA model initialized and ready.")
 
-# ------------------- Training Arguments -------------------
 training_args = TrainingArguments(
     output_dir="./results",
     evaluation_strategy="epoch",
@@ -120,28 +113,17 @@ training_args = TrainingArguments(
     disable_tqdm=False
 )
 
-# ------------------- Metrics -------------------
 def compute_metrics(eval_pred):
     logits, labels = eval_pred
-
-    # Convert to tensors
     logits = torch.tensor(logits)
     labels = torch.tensor(labels)
-
-    # Log stats on logits
     logger.info(f"Logits mean: {logits.float().mean().item():.4f} | std: {logits.float().std().item():.4f}")
-
-    # Compute predictions and probabilities
     probs = torch.nn.functional.softmax(logits, dim=-1)[:, 1].numpy()
     preds = torch.argmax(logits, dim=-1).numpy()
     labels = labels.numpy()
-
-    # Log some samples
     logger.info(f"Sample preds: {preds[:10]}")
     logger.info(f"Sample labels: {labels[:10]}")
     logger.info(f"Computing metrics on {len(labels)} samples | Positives: {(labels == 1).sum()} | Negatives: {(labels == 0).sum()}")
-
-    # Compute metrics
     precision, recall, f1, _ = precision_recall_fscore_support(labels, preds, average='binary', zero_division=0)
     acc = accuracy_score(labels, preds)
     try:
@@ -164,7 +146,6 @@ def compute_metrics(eval_pred):
         "false_negatives": fn,
     }
 
-# ------------------- Custom Callback -------------------
 class TrainLoggingCallback(TrainerCallback):
     def __init__(self, train_eval_interval=0.25):
         self.train_eval_interval = train_eval_interval
@@ -214,7 +195,6 @@ class TrainLoggingCallback(TrainerCallback):
             if all(k in metrics for k in ["eval_loss", "eval_auc"]):
                 logger.info(f"[Eval Epoch {epoch}] Loss: {metrics['eval_loss']:.4f} | AUC: {metrics['eval_auc']:.4f}")
 
-# ------------------- Trainer -------------------
 trainer = Trainer(
     model=model,
     args=training_args,
@@ -226,20 +206,13 @@ trainer = Trainer(
         TrainLoggingCallback(train_eval_interval=0.25)  # Adjustable if needed
     ],
 )
-
-# ------------------- Train -------------------
 logger.info("Starting training...")
 trainer.train()
 
-# ------------------- Final Test Evaluation (Manual Set) -------------------
 logger.info("\n[Final Evaluation on Held-Out Manual Set] Running test metrics...")
-
-# Preprocess and convert manual set
 manual_dataset = Dataset.from_pandas(manual_df.rename(columns={"Malicious (0/1)": "label"}))
 manual_dataset = manual_dataset.map(preprocess_function, batched=True)
-
 test_metrics = trainer.evaluate(eval_dataset=manual_dataset, metric_key_prefix="test")
-
 tp = test_metrics.get("test_true_positives", 0)
 fp = test_metrics.get("test_false_positives", 0)
 tn = test_metrics.get("test_true_negatives", 0)
@@ -258,8 +231,6 @@ logger.info(f"[Test Manual Set] Runtime: {test_metrics['test_runtime']:.2f}s | "
 if all(k in test_metrics for k in ["test_loss", "test_auc"]):
     logger.info(f"[Test Manual Set] Loss: {test_metrics['test_loss']:.4f} | AUC: {test_metrics['test_auc']:.4f}")
 
-
-# ------------------- Save -------------------
 model_path = "./deberta_lora_classifier"
 model.save_pretrained(model_path)
 tokenizer.save_pretrained(model_path)
