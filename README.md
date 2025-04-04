@@ -171,4 +171,67 @@ malicious_prompt_classification
 │
 │── environment.yml                  # Conda environment setup
 │── README.md                        # Project documentation
+```
+
+## RLHF: Reinforcement Learning from Human Feedback
+
+This module implements a lightweight RLHF loop that fine-tunes an open-source language model to iteratively improve prompt classification and generation. The goal is to generate realistic internal employee prompts—some benign, others risky or policy-violating—and refine the model using structured human feedback.
+
+### Model & Setup
+
+- **Base model**: `microsoft/phi-2` (quantized with bitsandbytes)
+- **Training adapter**: LoRA via `peft`
+- **Quantization**: 8-bit (fp16 compute)
+- **Frameworks**: PyTorch, HuggingFace Transformers, Streamlit (UI)
+
+### File Overview
+
+| Script/File              | Purpose                                                                 |
+|--------------------------|-------------------------------------------------------------------------|
+| `model_manager.py`       | Loads the base model, generates prompt batches, performs weighted fine-tuning, and manages checkpoints. |
+| `rlhf.py`                | Orchestrates the full feedback loop: batch generation → feedback waiting → model fine-tuning → checkpoint saving. |
+| `review_ui.py`           | Streamlit-based human-in-the-loop UI for accepting/rejecting/editing prompt-label pairs. |
+| `data/seed_prompts.csv`  | Initial seed prompts used for few-shot generation. Updated after every round with accepted/edited feedback. |
+| `data/accepted_log.csv`  | Stores cumulative accepted prompts from all batches.                    |
+| `data/rejected_log.csv`  | Stores cumulative rejected prompts from all batches.                    |
+| `data/batches/`          | Contains `batch_1.csv`, `batch_2.csv`, etc. Each holds a round of generated prompts for review. |
+| `model_checkpoints/`     | Stores saved model/tokenizer weights after each batch-level fine-tuning pass. |
+
+### Running the RLHF Pipeline
+
+1. **Open the Streamlit UI**: This launches streamlit UI as a local host
+```bash
+   streamlit run review_ui.py
+```
+
+2. **Launch the backend loop in a separate terminal**: This will generate prompt batches, wait for feedback, and trigger fine-tuning.
+```bash
+   python rlhf.py
+```
+3. **Refresh the UI page**
+
+4. **The user can now review prompts**:
+- Accept or reject each prompt
+- Edit the label or department field if necessary
+- Click Save Feedback and Trigger Training
+
+5. **Model Training**
+- Fine-tuning will automatically begin once feedback is saved
+- The model is trained cumulatively on all accepted and rejected feedback across all prior batches
+- After training, the updated model is saved to model_checkpoints/
+
+### Notes on Generation & Training
+
+- Prompt generation is conditioned on a small sample of few-shot examples pulled from the evolving `seed_prompts.csv`
+- All generated departments are constrained to the following:
+```bash
+  Legal, HR, Security, Safety, Ethics and Compliance, Government Relations, None
+```
+- The model is fine-tuned cumulatively on all accepted and rejected prompts from prior batches
+- Prompts are weighted during training to simulate reward-based feedback:
+  - **Accepted prompts** receive a full reward weight of `1.0`
+  - **Edited prompts** are slightly downweighted (`0.8`)
+  - **Rejected prompts** are retained as negative signals with a low weight (`0.1`)
+- This mimics **Reinforcement Learning from Human Feedback (RLHF)** without requiring reward models or PPO
+- Training uses the **AdamW** optimizer and runs entirely on **GPU** (if available)
 

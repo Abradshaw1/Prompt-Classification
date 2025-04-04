@@ -146,6 +146,43 @@ def compute_metrics(eval_pred):
         "false_negatives": fn,
     }
 
+def plot_confusion_matrix_and_roc(probs, preds, labels, title_prefix, output_dir="./results"):
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Confusion Matrix
+    cm = confusion_matrix(labels, preds, labels=[0, 1])
+    fig_cm, ax_cm = plt.subplots()
+    ax_cm.imshow(cm, cmap=plt.cm.Blues)
+    ax_cm.set_title(f"{title_prefix} - Confusion Matrix")
+    ax_cm.set_xticks([0, 1])
+    ax_cm.set_xticklabels(["Non-Malicious", "Malicious"])
+    ax_cm.set_yticks([0, 1])
+    ax_cm.set_yticklabels(["Non-Malicious", "Malicious"])
+    ax_cm.set_xlabel("Predicted")
+    ax_cm.set_ylabel("True")
+
+    for i in range(2):
+        for j in range(2):
+            ax_cm.text(j, i, str(cm[i, j]), ha='center', va='center',
+                       color='white' if cm[i, j] > cm.max() / 2 else 'black')
+    fig_cm.tight_layout()
+    fig_cm.savefig(f"{output_dir}/{title_prefix.lower().replace(' ', '_')}_confusion_matrix.png")
+    plt.close(fig_cm)
+
+    # ROC Curve
+    fpr, tpr, _ = roc_curve(labels, probs)
+    fig_roc, ax_roc = plt.subplots()
+    ax_roc.plot(fpr, tpr, label="ROC Curve")
+    ax_roc.plot([0, 1], [0, 1], linestyle="--", label="Random Guess")
+    ax_roc.set_title(f"{title_prefix} - ROC Curve")
+    ax_roc.set_xlabel("False Positive Rate")
+    ax_roc.set_ylabel("True Positive Rate")
+    ax_roc.legend()
+    fig_roc.tight_layout()
+    fig_roc.savefig(f"{output_dir}/{title_prefix.lower().replace(' ', '_')}_roc_curve.png")
+    plt.close(fig_roc)
+
+
 class TrainLoggingCallback(TrainerCallback):
     def __init__(self, train_eval_interval=0.25):
         self.train_eval_interval = train_eval_interval
@@ -230,6 +267,24 @@ logger.info(f"[Test Manual Set] Runtime: {test_metrics['test_runtime']:.2f}s | "
             f"Samples/sec: {test_metrics['test_samples_per_second']:.2f} | Steps/sec: {test_metrics['test_steps_per_second']:.2f}")
 if all(k in test_metrics for k in ["test_loss", "test_auc"]):
     logger.info(f"[Test Manual Set] Loss: {test_metrics['test_loss']:.4f} | AUC: {test_metrics['test_auc']:.4f}")
+
+# Predict on validation set and plot
+val_predictions = trainer.predict(val_dataset)
+val_logits = torch.tensor(val_predictions.predictions)
+val_probs = torch.nn.functional.softmax(val_logits, dim=-1)[:, 1].numpy()
+val_preds = torch.argmax(val_logits, dim=-1).numpy()
+val_labels = val_predictions.label_ids
+
+plot_confusion_matrix_and_roc(val_probs, val_preds, val_labels, "Validation Set")
+
+# Predict on test (manual) set and plot
+test_predictions = trainer.predict(manual_dataset)
+test_logits = torch.tensor(test_predictions.predictions)
+test_probs = torch.nn.functional.softmax(test_logits, dim=-1)[:, 1].numpy()
+test_preds = torch.argmax(test_logits, dim=-1).numpy()
+test_labels = test_predictions.label_ids
+
+plot_confusion_matrix_and_roc(test_probs, test_preds, test_labels, "Test Manual Set")
 
 model_path = "./deberta_lora_classifier"
 model.save_pretrained(model_path)
