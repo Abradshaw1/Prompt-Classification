@@ -25,6 +25,16 @@ def get_latest_batch():
 
 batch_path, batch_id = get_latest_batch()
 proposed_df = pd.read_csv(batch_path)
+
+if "last_batch_id" not in st.session_state:
+    st.session_state["last_batch_id"] = batch_id
+
+if batch_id != st.session_state["last_batch_id"]:
+    for k in list(st.session_state.keys()):
+        if k.startswith("accept_") or k.startswith("reject_"):
+            del st.session_state[k]
+    st.session_state["last_batch_id"] = batch_id
+
 st.info(f"Reviewing Batch {batch_id} → `{batch_path}`")
 
 accepted, rejected = [], []
@@ -84,7 +94,6 @@ if st.button("Save Feedback and Trigger Training"):
                 time.sleep(3)
 
     st.success("Training complete! Reloading next batch...")
-    st.rerun()
 
 # === Export session prompts ===
 if st.button("Save All Prompts From Session"):
@@ -102,11 +111,3 @@ if st.button("Save All Prompts From Session"):
     combined.drop_duplicates(subset=["Prompt", "Label", "Department", "EditType", "BatchID"], inplace=True)
     combined.to_csv(SESSION_EXPORT_PATH, index=False)
     st.success(f"Session prompts exported to `{SESSION_EXPORT_PATH}`.")
-# if st.button("Save All Prompts From Session"):
-#     if os.path.exists(ACCEPTED_LOG):
-#         df = pd.read_csv(ACCEPTED_LOG)
-#         session_df = df[df["EditType"].isin(["accepted", "edited"])]
-#         session_df.to_csv(SESSION_EXPORT_PATH, index=False)
-#         st.success(f" Session prompts exported to `{SESSION_EXPORT_PATH}`.")
-#     else:
-#         st.warning("No accepted prompts found.")
