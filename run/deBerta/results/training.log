@@ -1,0 +1,252 @@
+2025-03-30 00:25:17,048 - INFO - Using device: cuda
+2025-03-30 00:25:17,125 - INFO - Loaded full dataset with 76473 rows.
+2025-03-30 00:25:17,125 - INFO - Manual (held-out test) rows: 120 | Synthetic + Manual-train rows: 76353
+2025-03-30 00:25:17,134 - INFO - Train set distribution:
+  Non-malicious (0): 29773
+  Malicious     (1): 31309
+  Total:             61082
+2025-03-30 00:25:17,135 - INFO - Validation set distribution:
+  Non-malicious (0): 7444
+  Malicious     (1): 7827
+  Total:             15271
+2025-03-30 00:25:17,135 - INFO - Test (Manual) set distribution:
+  Non-malicious (0): 36
+  Malicious     (1): 84
+  Total:             120
+2025-03-30 00:25:17,381 - INFO - Tokenizer loaded successfully.
+2025-03-30 00:25:20,906 - INFO - Tokenization and dataset formatting complete.
+2025-03-30 00:25:21,317 - INFO - DeBERTa LoRA model initialized and ready.
+2025-03-30 00:25:21,490 - INFO - Starting training...
+2025-03-30 00:25:41,604 - INFO - 
+[Train Evaluation at Epoch 0.00] Running training metrics...
+2025-03-30 00:28:38,420 - INFO - Logits mean: -0.2908 | std: 5.4077
+2025-03-30 00:28:38,423 - INFO - Sample preds: [0 0 0 0 0 0 0 0 0 0]
+2025-03-30 00:28:38,423 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 00:28:38,423 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 00:28:38,443 - INFO - [Train Epoch 0.00] Accuracy: 0.4916 | F1: 0.0194 | Precision: 0.8552 | Recall: 0.0098 | AUC: 0.4526 | TPR: 0.0098 | TNR: 0.9983 | FPR: 0.0017 | FNR: 0.9902
+2025-03-30 00:29:18,000 - INFO - 
+[Train Evaluation at Epoch 0.25] Running training metrics...
+2025-03-30 00:32:14,047 - INFO - Logits mean: -0.0165 | std: 0.8834
+2025-03-30 00:32:14,048 - INFO - Sample preds: [0 1 1 1 1 1 0 0 1 0]
+2025-03-30 00:32:14,048 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 00:32:14,048 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 00:32:14,072 - INFO - [Train Epoch 0.25] Accuracy: 0.7040 | F1: 0.6496 | Precision: 0.8257 | Recall: 0.5354 | AUC: 0.7953 | TPR: 0.5354 | TNR: 0.8812 | FPR: 0.1188 | FNR: 0.4646
+2025-03-30 00:33:53,003 - INFO - 
+[Train Evaluation at Epoch 0.50] Running training metrics...
+2025-03-30 00:36:48,934 - INFO - Logits mean: -0.0240 | std: 1.0886
+2025-03-30 00:36:48,935 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 0]
+2025-03-30 00:36:48,935 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 00:36:48,936 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 00:36:48,956 - INFO - [Train Epoch 0.50] Accuracy: 0.8715 | F1: 0.8667 | Precision: 0.9253 | Recall: 0.8151 | AUC: 0.9478 | TPR: 0.8151 | TNR: 0.9308 | FPR: 0.0692 | FNR: 0.1849
+2025-03-30 00:38:08,079 - INFO - 
+[Train Evaluation at Epoch 0.75] Running training metrics...
+2025-03-30 00:41:04,128 - INFO - Logits mean: -0.0128 | std: 1.1871
+2025-03-30 00:41:04,129 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 00:41:04,129 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 00:41:04,129 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 00:41:04,152 - INFO - [Train Epoch 0.75] Accuracy: 0.8977 | F1: 0.8961 | Precision: 0.9353 | Recall: 0.8599 | AUC: 0.9611 | TPR: 0.8599 | TNR: 0.9375 | FPR: 0.0625 | FNR: 0.1401
+2025-03-30 00:42:43,051 - INFO - 
+[Train Evaluation at Epoch 1.00] Running training metrics...
+2025-03-30 00:45:39,363 - INFO - Logits mean: -0.0025 | std: 1.2680
+2025-03-30 00:45:39,364 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 00:45:39,365 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 00:45:39,365 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 00:45:39,381 - INFO - [Train Epoch 1.00] Accuracy: 0.9083 | F1: 0.9065 | Precision: 0.9492 | Recall: 0.8675 | AUC: 0.9678 | TPR: 0.8675 | TNR: 0.9512 | FPR: 0.0488 | FNR: 0.1325
+2025-03-30 00:47:04,740 - INFO - Logits mean: 0.0168 | std: 1.2253
+2025-03-30 00:47:04,741 - INFO - Sample preds: [0 0 0 0 1 1 0 0 0 0]
+2025-03-30 00:47:04,742 - INFO - Sample labels: [1 0 0 1 1 1 1 0 1 0]
+2025-03-30 00:47:04,742 - INFO - Computing metrics on 15271 samples | Positives: 7827 | Negatives: 7444
+2025-03-30 00:47:04,748 - INFO - 
+[Eval Epoch 1.0] Accuracy: 0.9068 | F1: 0.9052 | Precision: 0.9447 | Recall: 0.8689 | AUC: 0.9681 | TPR: 0.8689 | TNR: 0.9465 | FPR: 0.0535 | FNR: 0.1311
+2025-03-30 00:47:04,748 - INFO - [Eval Epoch 1.0] Runtime: 44.07s | Samples/sec: 346.49 | Steps/sec: 10.85
+2025-03-30 00:47:04,748 - INFO - [Eval Epoch 1.0] Loss: 0.3507 | AUC: 0.9681
+2025-03-30 00:48:02,903 - INFO - 
+[Train Evaluation at Epoch 1.25] Running training metrics...
+2025-03-30 00:50:58,727 - INFO - Logits mean: 0.0095 | std: 1.2210
+2025-03-30 00:50:58,727 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 00:50:58,728 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 00:50:58,728 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 00:50:58,744 - INFO - [Train Epoch 1.25] Accuracy: 0.9189 | F1: 0.9182 | Precision: 0.9500 | Recall: 0.8885 | AUC: 0.9719 | TPR: 0.8885 | TNR: 0.9509 | FPR: 0.0491 | FNR: 0.1115
+2025-03-30 00:52:37,630 - INFO - 
+[Train Evaluation at Epoch 1.50] Running training metrics...
+2025-03-30 00:55:33,528 - INFO - Logits mean: 0.0121 | std: 1.2505
+2025-03-30 00:55:33,529 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 00:55:33,530 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 00:55:33,530 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 00:55:33,550 - INFO - [Train Epoch 1.50] Accuracy: 0.9262 | F1: 0.9260 | Precision: 0.9521 | Recall: 0.9013 | AUC: 0.9748 | TPR: 0.9013 | TNR: 0.9523 | FPR: 0.0477 | FNR: 0.0987
+2025-03-30 00:57:12,474 - INFO - 
+[Train Evaluation at Epoch 1.75] Running training metrics...
+2025-03-30 01:00:08,531 - INFO - Logits mean: 0.0161 | std: 1.2887
+2025-03-30 01:00:08,532 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:00:08,532 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:00:08,532 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 01:00:08,556 - INFO - [Train Epoch 1.75] Accuracy: 0.9242 | F1: 0.9230 | Precision: 0.9636 | Recall: 0.8856 | AUC: 0.9768 | TPR: 0.8856 | TNR: 0.9649 | FPR: 0.0351 | FNR: 0.1144
+2025-03-30 01:01:27,701 - INFO - 
+[Train Evaluation at Epoch 2.00] Running training metrics...
+2025-03-30 01:04:23,741 - INFO - Logits mean: 0.0081 | std: 1.2597
+2025-03-30 01:04:23,742 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:04:23,742 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:04:23,743 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 01:04:23,764 - INFO - [Train Epoch 2.00] Accuracy: 0.9316 | F1: 0.9314 | Precision: 0.9591 | Recall: 0.9052 | AUC: 0.9785 | TPR: 0.9052 | TNR: 0.9594 | FPR: 0.0406 | FNR: 0.0948
+2025-03-30 01:05:50,867 - INFO - Logits mean: 0.0116 | std: 1.2812
+2025-03-30 01:05:50,868 - INFO - Sample preds: [0 0 0 0 1 1 0 0 0 0]
+2025-03-30 01:05:50,868 - INFO - Sample labels: [1 0 0 1 1 1 1 0 1 0]
+2025-03-30 01:05:50,869 - INFO - Computing metrics on 15271 samples | Positives: 7827 | Negatives: 7444
+2025-03-30 01:05:50,877 - INFO - 
+[Eval Epoch 2.0] Accuracy: 0.9183 | F1: 0.9162 | Precision: 0.9664 | Recall: 0.8710 | AUC: 0.9776 | TPR: 0.8710 | TNR: 0.9682 | FPR: 0.0318 | FNR: 0.1290
+2025-03-30 01:05:50,877 - INFO - [Eval Epoch 2.0] Runtime: 44.04s | Samples/sec: 346.78 | Steps/sec: 10.86
+2025-03-30 01:05:50,878 - INFO - [Eval Epoch 2.0] Loss: 0.3316 | AUC: 0.9776
+2025-03-30 01:06:46,893 - INFO - 
+[Train Evaluation at Epoch 2.25] Running training metrics...
+2025-03-30 01:09:43,016 - INFO - Logits mean: 0.0245 | std: 1.2449
+2025-03-30 01:09:43,017 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:09:43,017 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:09:43,017 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 01:09:43,037 - INFO - [Train Epoch 2.25] Accuracy: 0.9371 | F1: 0.9376 | Precision: 0.9540 | Recall: 0.9218 | AUC: 0.9803 | TPR: 0.9218 | TNR: 0.9532 | FPR: 0.0468 | FNR: 0.0782
+2025-03-30 01:11:21,899 - INFO - 
+[Train Evaluation at Epoch 2.50] Running training metrics...
+2025-03-30 01:14:18,073 - INFO - Logits mean: 0.0238 | std: 1.3314
+2025-03-30 01:14:18,074 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:14:18,074 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:14:18,074 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 01:14:18,098 - INFO - [Train Epoch 2.50] Accuracy: 0.9314 | F1: 0.9304 | Precision: 0.9687 | Recall: 0.8950 | AUC: 0.9816 | TPR: 0.8950 | TNR: 0.9696 | FPR: 0.0304 | FNR: 0.1050
+2025-03-30 01:15:56,976 - INFO - 
+[Train Evaluation at Epoch 2.75] Running training metrics...
+2025-03-30 01:18:52,847 - INFO - Logits mean: 0.0217 | std: 1.2775
+2025-03-30 01:18:52,848 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:18:52,848 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:18:52,849 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 01:18:52,871 - INFO - [Train Epoch 2.75] Accuracy: 0.9402 | F1: 0.9404 | Precision: 0.9603 | Recall: 0.9213 | AUC: 0.9830 | TPR: 0.9213 | TNR: 0.9600 | FPR: 0.0400 | FNR: 0.0787
+2025-03-30 01:20:11,973 - INFO - 
+[Train Evaluation at Epoch 3.00] Running training metrics...
+2025-03-30 01:23:07,978 - INFO - Logits mean: 0.0257 | std: 1.2953
+2025-03-30 01:23:07,979 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:23:07,979 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:23:07,980 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 01:23:08,003 - INFO - [Train Epoch 3.00] Accuracy: 0.9377 | F1: 0.9373 | Precision: 0.9672 | Recall: 0.9093 | AUC: 0.9845 | TPR: 0.9093 | TNR: 0.9676 | FPR: 0.0324 | FNR: 0.0907
+2025-03-30 01:24:36,795 - INFO - Logits mean: 0.0156 | std: 1.3084
+2025-03-30 01:24:36,796 - INFO - Sample preds: [0 0 0 0 1 1 0 0 0 0]
+2025-03-30 01:24:36,797 - INFO - Sample labels: [1 0 0 1 1 1 1 0 1 0]
+2025-03-30 01:24:36,797 - INFO - Computing metrics on 15271 samples | Positives: 7827 | Negatives: 7444
+2025-03-30 01:24:36,803 - INFO - 
+[Eval Epoch 3.0] Accuracy: 0.9341 | F1: 0.9338 | Precision: 0.9628 | Recall: 0.9065 | AUC: 0.9837 | TPR: 0.9065 | TNR: 0.9632 | FPR: 0.0368 | FNR: 0.0935
+2025-03-30 01:24:36,803 - INFO - [Eval Epoch 3.0] Runtime: 43.95s | Samples/sec: 347.46 | Steps/sec: 10.88
+2025-03-30 01:24:36,804 - INFO - [Eval Epoch 3.0] Loss: 0.3073 | AUC: 0.9837
+2025-03-30 01:25:31,061 - INFO - 
+[Train Evaluation at Epoch 3.25] Running training metrics...
+2025-03-30 01:28:26,702 - INFO - Logits mean: 0.0066 | std: 1.3468
+2025-03-30 01:28:26,703 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:28:26,703 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:28:26,704 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 01:28:26,721 - INFO - [Train Epoch 3.25] Accuracy: 0.9443 | F1: 0.9451 | Precision: 0.9551 | Recall: 0.9353 | AUC: 0.9857 | TPR: 0.9353 | TNR: 0.9538 | FPR: 0.0462 | FNR: 0.0647
+2025-03-30 01:30:05,546 - INFO - 
+[Train Evaluation at Epoch 3.50] Running training metrics...
+2025-03-30 01:33:01,159 - INFO - Logits mean: 0.0280 | std: 1.3252
+2025-03-30 01:33:01,160 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:33:01,160 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:33:01,161 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 01:33:01,184 - INFO - [Train Epoch 3.50] Accuracy: 0.9421 | F1: 0.9420 | Precision: 0.9674 | Recall: 0.9179 | AUC: 0.9867 | TPR: 0.9179 | TNR: 0.9675 | FPR: 0.0325 | FNR: 0.0821
+2025-03-30 01:34:40,032 - INFO - 
+[Train Evaluation at Epoch 3.75] Running training metrics...
+2025-03-30 01:37:35,788 - INFO - Logits mean: 0.0041 | std: 1.3579
+2025-03-30 01:37:35,789 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:37:35,790 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:37:35,791 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 01:37:35,807 - INFO - [Train Epoch 3.75] Accuracy: 0.9421 | F1: 0.9420 | Precision: 0.9694 | Recall: 0.9160 | AUC: 0.9876 | TPR: 0.9160 | TNR: 0.9696 | FPR: 0.0304 | FNR: 0.0840
+2025-03-30 01:38:54,913 - INFO - 
+[Train Evaluation at Epoch 4.00] Running training metrics...
+2025-03-30 01:41:51,029 - INFO - Logits mean: 0.0210 | std: 1.3226
+2025-03-30 01:41:51,030 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:41:51,030 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:41:51,030 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 01:41:51,050 - INFO - [Train Epoch 4.00] Accuracy: 0.9440 | F1: 0.9440 | Precision: 0.9688 | Recall: 0.9204 | AUC: 0.9884 | TPR: 0.9204 | TNR: 0.9689 | FPR: 0.0311 | FNR: 0.0796
+2025-03-30 01:43:21,712 - INFO - Logits mean: 0.0235 | std: 1.3791
+2025-03-30 01:43:21,713 - INFO - Sample preds: [0 0 0 1 1 1 0 0 1 0]
+2025-03-30 01:43:21,714 - INFO - Sample labels: [1 0 0 1 1 1 1 0 1 0]
+2025-03-30 01:43:21,714 - INFO - Computing metrics on 15271 samples | Positives: 7827 | Negatives: 7444
+2025-03-30 01:43:21,723 - INFO - 
+[Eval Epoch 4.0] Accuracy: 0.9394 | F1: 0.9394 | Precision: 0.9630 | Recall: 0.9170 | AUC: 0.9877 | TPR: 0.9170 | TNR: 0.9629 | FPR: 0.0371 | FNR: 0.0830
+2025-03-30 01:43:21,723 - INFO - [Eval Epoch 4.0] Runtime: 44.06s | Samples/sec: 346.56 | Steps/sec: 10.85
+2025-03-30 01:43:21,723 - INFO - [Eval Epoch 4.0] Loss: 0.2966 | AUC: 0.9877
+2025-03-30 01:44:14,375 - INFO - 
+[Train Evaluation at Epoch 4.25] Running training metrics...
+2025-03-30 01:47:10,594 - INFO - Logits mean: 0.0196 | std: 1.3816
+2025-03-30 01:47:10,595 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:47:10,596 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:47:10,596 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 01:47:10,618 - INFO - [Train Epoch 4.25] Accuracy: 0.9474 | F1: 0.9476 | Precision: 0.9671 | Recall: 0.9289 | AUC: 0.9893 | TPR: 0.9289 | TNR: 0.9668 | FPR: 0.0332 | FNR: 0.0711
+2025-03-30 01:48:49,450 - INFO - 
+[Train Evaluation at Epoch 4.50] Running training metrics...
+2025-03-30 01:51:45,836 - INFO - Logits mean: 0.0008 | std: 1.3529
+2025-03-30 01:51:45,837 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:51:45,837 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:51:45,838 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 01:51:45,855 - INFO - [Train Epoch 4.50] Accuracy: 0.9454 | F1: 0.9451 | Precision: 0.9737 | Recall: 0.9182 | AUC: 0.9899 | TPR: 0.9182 | TNR: 0.9739 | FPR: 0.0261 | FNR: 0.0818
+2025-03-30 01:53:24,744 - INFO - 
+[Train Evaluation at Epoch 4.75] Running training metrics...
+2025-03-30 01:56:21,052 - INFO - Logits mean: -0.0003 | std: 1.4129
+2025-03-30 01:56:21,053 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:56:21,054 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 01:56:21,054 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 01:56:21,078 - INFO - [Train Epoch 4.75] Accuracy: 0.9522 | F1: 0.9526 | Precision: 0.9677 | Recall: 0.9381 | AUC: 0.9905 | TPR: 0.9381 | TNR: 0.9671 | FPR: 0.0329 | FNR: 0.0619
+2025-03-30 01:57:59,929 - INFO - 
+[Train Evaluation at Epoch 5.00] Running training metrics...
+2025-03-30 02:00:56,330 - INFO - Logits mean: 0.0013 | std: 1.3721
+2025-03-30 02:00:56,331 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 02:00:56,331 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 02:00:56,331 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 02:00:56,347 - INFO - [Train Epoch 5.00] Accuracy: 0.9516 | F1: 0.9518 | Precision: 0.9720 | Recall: 0.9324 | AUC: 0.9910 | TPR: 0.9324 | TNR: 0.9718 | FPR: 0.0282 | FNR: 0.0676
+2025-03-30 02:02:09,147 - INFO - Logits mean: -0.0005 | std: 1.3867
+2025-03-30 02:02:09,148 - INFO - Sample preds: [0 0 0 1 1 1 1 0 1 0]
+2025-03-30 02:02:09,149 - INFO - Sample labels: [1 0 0 1 1 1 1 0 1 0]
+2025-03-30 02:02:09,149 - INFO - Computing metrics on 15271 samples | Positives: 7827 | Negatives: 7444
+2025-03-30 02:02:09,156 - INFO - 
+[Eval Epoch 5.0] Accuracy: 0.9476 | F1: 0.9479 | Precision: 0.9664 | Recall: 0.9301 | AUC: 0.9902 | TPR: 0.9301 | TNR: 0.9660 | FPR: 0.0340 | FNR: 0.0699
+2025-03-30 02:02:09,156 - INFO - [Eval Epoch 5.0] Runtime: 44.16s | Samples/sec: 345.78 | Steps/sec: 10.82
+2025-03-30 02:02:09,156 - INFO - [Eval Epoch 5.0] Loss: 0.2849 | AUC: 0.9902
+2025-03-30 02:02:59,830 - INFO - 
+[Train Evaluation at Epoch 5.25] Running training metrics...
+2025-03-30 02:05:55,959 - INFO - Logits mean: -0.0007 | std: 1.4006
+2025-03-30 02:05:55,960 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 02:05:55,960 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 02:05:55,960 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 02:05:55,984 - INFO - [Train Epoch 5.25] Accuracy: 0.9568 | F1: 0.9575 | Precision: 0.9670 | Recall: 0.9482 | AUC: 0.9915 | TPR: 0.9482 | TNR: 0.9659 | FPR: 0.0341 | FNR: 0.0518
+2025-03-30 02:07:34,842 - INFO - 
+[Train Evaluation at Epoch 5.50] Running training metrics...
+2025-03-30 02:10:31,050 - INFO - Logits mean: -0.0078 | std: 1.4047
+2025-03-30 02:10:31,051 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 02:10:31,052 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 02:10:31,052 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 02:10:31,075 - INFO - [Train Epoch 5.50] Accuracy: 0.9587 | F1: 0.9594 | Precision: 0.9680 | Recall: 0.9509 | AUC: 0.9919 | TPR: 0.9509 | TNR: 0.9669 | FPR: 0.0331 | FNR: 0.0491
+2025-03-30 02:12:09,960 - INFO - 
+[Train Evaluation at Epoch 5.75] Running training metrics...
+2025-03-30 02:15:06,321 - INFO - Logits mean: -0.0113 | std: 1.3560
+2025-03-30 02:15:06,322 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 02:15:06,322 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 02:15:06,323 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 02:15:06,346 - INFO - [Train Epoch 5.75] Accuracy: 0.9591 | F1: 0.9597 | Precision: 0.9700 | Recall: 0.9496 | AUC: 0.9922 | TPR: 0.9496 | TNR: 0.9691 | FPR: 0.0309 | FNR: 0.0504
+2025-03-30 02:16:45,217 - INFO - 
+[Train Evaluation at Epoch 6.00] Running training metrics...
+2025-03-30 02:19:41,543 - INFO - Logits mean: -0.0060 | std: 1.4130
+2025-03-30 02:19:41,544 - INFO - Sample preds: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 02:19:41,544 - INFO - Sample labels: [0 1 1 1 0 0 0 0 1 1]
+2025-03-30 02:19:41,545 - INFO - Computing metrics on 61082 samples | Positives: 31309 | Negatives: 29773
+2025-03-30 02:19:41,562 - INFO - [Train Epoch 6.00] Accuracy: 0.9603 | F1: 0.9609 | Precision: 0.9705 | Recall: 0.9514 | AUC: 0.9924 | TPR: 0.9514 | TNR: 0.9696 | FPR: 0.0304 | FNR: 0.0486
+2025-03-30 02:20:56,126 - INFO - Logits mean: -0.0019 | std: 1.3611
+2025-03-30 02:20:56,127 - INFO - Sample preds: [0 0 0 1 1 1 1 0 1 0]
+2025-03-30 02:20:56,128 - INFO - Sample labels: [1 0 0 1 1 1 1 0 1 0]
+2025-03-30 02:20:56,129 - INFO - Computing metrics on 15271 samples | Positives: 7827 | Negatives: 7444
+2025-03-30 02:20:56,137 - INFO - 
+[Eval Epoch 6.0] Accuracy: 0.9542 | F1: 0.9547 | Precision: 0.9680 | Recall: 0.9419 | AUC: 0.9917 | TPR: 0.9419 | TNR: 0.9672 | FPR: 0.0328 | FNR: 0.0581
+2025-03-30 02:20:56,138 - INFO - [Eval Epoch 6.0] Runtime: 44.15s | Samples/sec: 345.89 | Steps/sec: 10.83
+2025-03-30 02:20:56,138 - INFO - [Eval Epoch 6.0] Loss: 0.2756 | AUC: 0.9917
+2025-03-30 02:20:56,434 - INFO - 
+[Final Evaluation on Held-Out Manual Set] Running test metrics...
+2025-03-30 02:20:56,861 - INFO - Logits mean: 0.0199 | std: 1.1454
+2025-03-30 02:20:56,861 - INFO - Sample preds: [0 0 0 0 0 0 0 0 0 0]
+2025-03-30 02:20:56,861 - INFO - Sample labels: [0 0 0 0 0 0 0 0 0 0]
+2025-03-30 02:20:56,862 - INFO - Computing metrics on 141 samples | Positives: 99 | Negatives: 42
+2025-03-30 02:20:56,865 - INFO - [Test Manual Set] Accuracy: 0.6312 | F1: 0.6667 | Precision: 0.9123 | Recall: 0.5253 | AUC: 0.8076 | TPR: 0.5253 | TNR: 0.8810 | FPR: 0.1190 | FNR: 0.4747
+2025-03-30 02:20:56,865 - INFO - [Test Manual Set] Runtime: 0.40s | Samples/sec: 349.08 | Steps/sec: 12.38
+2025-03-30 02:20:56,865 - INFO - [Test Manual Set] Loss: 0.8657 | AUC: 0.8076
+2025-03-30 02:20:57,154 - INFO - Model saved to ./deberta_lora_classifier
