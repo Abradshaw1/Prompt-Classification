@@ -48,7 +48,7 @@ def run_pipeline():
 
         if not accepted_df.empty or not rejected_df.empty:
             print(f"[TRAINING] Fine-tuning on cumulative feedback...")
-            fine_tune_model(model, tokenizer, accepted_df, rejected_df)
+            fine_tune_model(model, tokenizer, accepted_df, rejected_df, current_batch_id=batch_id)
             save_checkpoint(model, tokenizer)
             update_seed_data_from_accepted_log()
         else:
