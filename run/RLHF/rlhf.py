@@ -19,10 +19,10 @@ def run_pipeline():
     initialize_logs()
     model, tokenizer = load_model()
 
-    batch_id = 1
-    batch_path = f"{BATCH_DIR}/batch_{batch_id}.csv"
+    batch_id = 9
     while True:
         # === STEP 1: Generate new batch ===
+        batch_path = f"{BATCH_DIR}/batch_{batch_id}.csv"
         print(f"\n[INFO] Generating batch {batch_id}...")
 
         if os.path.exists(batch_path):
