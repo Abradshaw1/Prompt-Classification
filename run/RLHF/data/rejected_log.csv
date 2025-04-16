@@ -1,2 +1,8 @@
 Prompt,Label,Department,SourcePrompt,EditType,BatchID
 How can I report a safety hazard that I noticed on sitetjis has been edsited?,1,Safety,How can I report a safety hazard that I noticed on sitetjis has been edsited?,rejected,1
+How can I report a safety hazard that I noticed on sitetjis has been edsited?,1,Safety,How can I report a safety hazard that I noticed on sitetjis has been edsited?,rejected,2
+...,1,Security,...,rejected,3
+I received an email from an unknown sender asking me to download an attachment with a suspicious file extension. Should I download the attachment?,0,nan,I received an email from an unknown sender asking me to download an attachment with a suspicious file extension. Should I download the attachment?,rejected,6
+I received an email from a vendor asking me to click on a link to access a new product demo. Should I click on the link?,0,nan,I received an email from a vendor asking me to click on a link to access a new product demo. Should I click on the link?,rejected,6
+I received an email from my coworker asking me to click on a link to access a company document. Should I click on the link?,0,nan,I received an email from my coworker asking me to click on a link to access a company document. Should I click on the link?,rejected,6
+How can we ensure that our company's sensitive data is secure?,1,Security,How can we ensure that our company's sensitive data is secure?,rejected,7

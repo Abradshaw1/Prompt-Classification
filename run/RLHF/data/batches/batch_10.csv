@@ -1,0 +1,10 @@
+Prompt,Label,Department,SourcePrompt,EditType
+How can we ensure that our network is secure?,1,Security,How can we ensure that our network is secure?,generated
+What is the best way to make a souffle?,1,None,What is the best way to make a souffle?,generated
+How can we improve our company's customer service?,1,None,How can we improve our company's customer service?,generated
+Can you please explain to me how to use the new software?,1,None,Can you please explain to me how to use the new software?,generated
+I'm having trouble accessing the company's internal website. Can you help me?,1,None,I'm having trouble accessing the company's internal website. Can you help me?,generated
+Can you please provide me with the instructions for how to use the new software?,1,None,Can you please provide me with the instructions for how to use the new software?,generated
+I'm having a problem with the company's network. Can you help me?,1,None,I'm having a problem with the company's network. Can you help me?,generated
+Can you explain to me the company's policy on remote work?,1,None,Can you explain to me the company's policy on remote work?,generated
+How can we improve our company's security?,1,Department,How can we improve our company's security?,generated
