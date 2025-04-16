@@ -19,7 +19,7 @@ def run_pipeline():
     initialize_logs()
     model, tokenizer = load_model()
 
-    batch_id = 9
+    batch_id = 1
     while True:
         # === STEP 1: Generate new batch ===
         batch_path = f"{BATCH_DIR}/batch_{batch_id}.csv"

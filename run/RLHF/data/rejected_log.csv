@@ -1,0 +1,8 @@
+Prompt,Label,Department,SourcePrompt,EditType,BatchID
+How can we ensure that patient privacy is maintained at all times?,1,Security,How can we ensure that patient privacy is maintained at all times?,rejected,4
+What are the protocols for reporting a HIPAA violation?,1,HIPAA Compliance,What are the protocols for reporting a HIPAA violation?,rejected,4
+How can we ensure that all patient data is accurate and up to date?,1,Data Quality,How can we ensure that all patient data is accurate and up to date?,rejected,4
+What is the process for reporting a patient privacy violation?,1,HIPAA Compliance,What is the process for reporting a patient privacy violation?,rejected,4
+How can we ensure that all patient data is stored securely?,1,Security,How can we ensure that all patient data is stored securely?,rejected,4
+What are the protocols for handling patient data in the event of a data breach?,1,Security,What are the protocols for handling patient data in the event of a data breach?,rejected,4
+How can we ensure that all employees are trained in HIPAA regulations?,1,HIPAA Compliance,How can we ensure that all employees are trained in HIPAA regulations?,rejected,4
