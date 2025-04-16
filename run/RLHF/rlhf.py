@@ -20,11 +20,51 @@ def run_pipeline():
     model, tokenizer = load_model()
 
     batch_id = 1
+    batch_path = f"{BATCH_DIR}/batch_{batch_id}.csv"
     while True:
         # === STEP 1: Generate new batch ===
         print(f"\n[INFO] Generating batch {batch_id}...")
-        batch_df = generate_batch(model, tokenizer, batch_size=10, batch_id=batch_id)
-        batch_path = f"{BATCH_DIR}/batch_{batch_id}.csv"
+
+        if os.path.exists(batch_path):
+            print(f"[INFO] Batch {batch_id} already exists at {batch_path}. Skipping generation.")
+            
+            # Still need to wait for feedback if it hasn't been processed yet
+            print("[INFO] Checking if feedback is needed...")
+            while True:
+                if not os.path.exists(ACCEPTED_LOG):
+                    time.sleep(2)
+                    continue
+
+                accepted_df = pd.read_csv(ACCEPTED_LOG)
+                if not accepted_df.empty and accepted_df["BatchID"].astype(int).max() >= batch_id:
+                    break
+
+                print("[WAITING] Waiting for feedback on existing batch", batch_id)
+                time.sleep(3)
+            
+            batch_id += 1
+            continue
+
+        max_attempts = 3
+        attempt = 1
+        batch_df = pd.DataFrame()
+        
+        while attempt <= max_attempts:
+            batch_df = generate_batch(model, tokenizer, batch_size=10, batch_id=batch_id)
+            
+
+            if batch_df.empty or len(batch_df) == 0:
+                print(f"[WARNING] Attempt {attempt}: No prompts generated. Retrying...")
+                attempt += 1
+                time.sleep(1)  # Small delay before retry
+            else:
+                break
+
+        if batch_df.empty or len(batch_df) == 0:
+            print(f"[ERROR] Failed to generate prompts after {max_attempts} attempts. Skipping batch {batch_id}.")
+            batch_id += 1
+            continue
+
         batch_df.to_csv(batch_path, index=False)
         print(f"[INFO] Batch saved to: {batch_path}")
         print("[INFO] Awaiting Streamlit UI feedback...")
