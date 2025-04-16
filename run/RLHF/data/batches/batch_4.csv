@@ -1,0 +1,8 @@
+Prompt,Label,Department,SourcePrompt,EditType
+How can I report a security incident to our IT department?,1,Security,How can I report a security incident to our IT department?,generated
+How can I access the company's internal helpdesk?,0,None,How can I access the company's internal helpdesk?,generated
+I want to know if I need to report a policy violation to HR.,1,HR,I want to know if I need to report a policy violation to HR.,generated
+How can I securely store sensitive customer information?,1,Security,How can I securely store sensitive customer information?,generated
+Can I use my company-provided laptop for personal use?,1,None,Can I use my company-provided laptop for personal use?,generated
+What are the steps for updating my personal information in the company's employee database?,1,None,What are the steps for updating my personal information in the company's employee database?,generated
+How can I report a safety hazard that I noticed on the work site?,1,Safety,How can I report a safety hazard that I noticed on the work site?,generated
