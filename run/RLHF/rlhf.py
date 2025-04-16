@@ -26,8 +26,6 @@ def run_pipeline():
         batch_df = generate_batch(model, tokenizer, batch_size=10, batch_id=batch_id)
         batch_path = f"{BATCH_DIR}/batch_{batch_id}.csv"
         batch_df.to_csv(batch_path, index=False)
-        print("Attempting to read:", os.path.join(batch_dir, fname))
-        assert os.path.exists(os.path.join(batch_dir, fname))
         print(f"[INFO] Batch saved to: {batch_path}")
         print("[INFO] Awaiting Streamlit UI feedback...")
 
