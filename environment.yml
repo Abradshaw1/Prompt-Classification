@@ -327,6 +327,6 @@ dependencies:
   - zstandard=0.19.0=py39hb9d737c_0
   - zstd=1.5.6=ha6fb4c9_0
   - pip:
-      - en-core-web-sm==3.8.0
-      - tiktoken==0.9.0
+      - en-core-web-sm
+      - tiktoken
 prefix: /home/abradsha/anaconda3/envs/malicious_prompt_env
